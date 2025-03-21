@@ -1,5 +1,5 @@
 export function getBaseUrl() {
-  if (!window.location.href.includes('localhost') {
+  if (!window.location.href.includes('localhost')) {
     return "https://grupp-3.vercel.app/"
   }
   return "http://localhost:3000/";
