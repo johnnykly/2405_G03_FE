@@ -42,3 +42,12 @@ function createProductCard(product) {
 
   return element;
 }
+
+// Function to toggle sidemenu on mobile view
+const togglesidebar = document.getElementById("togglesidebar");
+togglesidebar.addEventListener("click", mySidebarToggle);
+
+function mySidebarToggle() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("show");
+}
