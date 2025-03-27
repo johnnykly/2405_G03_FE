@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="admin.css" />
+  <script defer src="admin.js"></script>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <h1>HAKIM LIVS</h1>
+    </div>
+    <h2 class="menu-title">MENY</h2>
+    <nav class="desktop-nav">
+      <ul>
+        <li class="menu-header">Produkter</li>
+        <li>
+          <a href="#" data-section="product-add">Lägg till produkt</a>
+        </li>
+        <li>
+          <a href="#" data-section="product-list">Se produktlista</a>
+        </li>
+        <li class="menu-header">Kategorier</li>
+        <li>
+          <a href="#" data-section="category-add">Lägg till kategori</a>
+        </li>
+        <li>
+          <a href="#" data-section="category-list">Se kategorilista</a>
+        </li>
+        <li class="menu-header">Kunder</li>
+        <li>
+          <a href="#" data-section="customer-add">Lägg till kund</a>
+        </li>
+        <li>
+          <a href="#" data-section="customer-list">Se kundlista</a>
+        </li>
+        <li class="menu-header">Order</li>
+        <li>
+          <a href="#" data-section="order-add">Lägg till order</a>
+        </li>
+        <li>
+          <a href="#" data-section="order-list">Se orderlista</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="has-submenu">
+        <a href="#">Produkter</a>
+        <ul class="sub-menu">
+          <li>
+            <a href="#" data-section="product-add">Lägg till produkt</a>
+          </li>
+          <li>
+            <a href="#" data-section="product-list">Se produktlista</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has-submenu">
+        <a href="#">Kategorier</a>
+        <ul class="sub-menu">
+          <li>
+            <a href="#" data-section="category-add">Lägg till kategori</a>
+          </li>
+          <li>
+            <a href="#" data-section="category-list">Se kategorilista</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has-submenu">
+        <a href="#">Kunder</a>
+        <ul class="sub-menu">
+          <li>
+            <a href="#" data-section="customer-add">Lägg till kund</a>
+          </li>
+          <li>
+            <a href="#" data-section="customer-list">Se kundlista</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has-submenu">
+        <a href="#">Order</a>
+        <ul class="sub-menu">
+          <li>
+            <a href="#" data-section="order-add">Lägg till order</a>
+          </li>
+          <li>
+            <a href="#" data-section="order-list">Se orderlista</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="main-content">
+    <h2 class="main-title">SNABBNAVIGATION</h2>
+    <div class="card-container">
+      <div class="card" data-section="product-add">
+        <p>Lägg till ny produkt</p>
+      </div>
+      <div class="card" data-section="category-add">
+        <p>Lägg till kategori</p>
+      </div>
+      <div class="card" data-section="customers">
+        <p>Kunder</p>
+      </div>
+      <div class="card" data-section="order-history">
+        <p>Orderhistorik</p>
+      </div>
+    </div>
+
+    <div class="content-section" id="product-add">
+      <h3>Lägg till ny produkt</h3>
+      <form id="addProductForm">
+        <div class="form-group">
+          <label for="productTitle">Produkt: Titel</label>
+          <input type="text" id="productTitle" name="productTitle" />
+        </div>
+
+        <div class="form-group">
+          <label for="productCategory">Produkt: Kategori</label>
+          <input type="text" id="productCategory" name="productCategory" />
+        </div>
+
+        <div class="form-group">
+          <label for="productProducer">Produkt: Producent</label>
+          <input type="text" id="productProducer" name="productProducer" />
+        </div>
+
+        <div class="form-group">
+          <label for="productWeight">Produkt: Vikt</label>
+          <input type="text" id="productWeight" name="productWeight" />
+        </div>
+
+        <div class="form-group">
+          <label for="productOrigin">Produkt: Ursprungsland</label>
+          <input type="text" id="productOrigin" name="productOrigin" />
+        </div>
+
+        <div class="form-group">
+          <label for="productDescription">Produkt: Beskrivning</label>
+          <textarea
+            id="productDescription"
+            name="productDescription"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Produkt: Priser</label>
+          <div class="price-group">
+            <input
+              type="text"
+              id="inkopspris"
+              name="inkopspris"
+              placeholder="Inköpspris"
+            />
+            <input
+              type="text"
+              id="forsaljningspris"
+              name="forsaljningspris"
+              placeholder="Försäljningspris"
+            />
+            <input
+              type="text"
+              id="nettovinst"
+              name="nettovinst"
+              placeholder="Nettovinst"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="productImage">Produkt: Bild</label>
+          <input
+            type="file"
+            id="productImage"
+            name="productImage"
+            accept="image/*"
+          />
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary">Lägg till produkt</button>
+          <button type="button" class="btn btn-secondary">Spara utkast</button>
+          <button type="button" class="btn btn-cancel">Avbryt</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="content-section" id="category-add">
+      <h3>Lägg till kategori</h3>
+      <p>Här kan du lägga till nya kategorier (placeholder).</p>
+    </div>
+
+    <div class="content-section" id="customers">
+      <h3>Kunder</h3>
+      <p>Hantera dina kunder här (placeholder).</p>
+    </div>
+
+    <div class="content-section" id="order-history">
+      <h3>Orderhistorik</h3>
+      <p>Se orderhistorik här (placeholder).</p>
+    </div>
+
+    <div class="content-section" id="product-list">
+      <h3>Produktlista</h3>
+      <p>Här kan du se en lista över produkter (placeholder).</p>
+    </div>
+    <div class="content-section" id="category-list">
+      <h3>Kategorilista</h3>
+      <p>Här kan du se en lista över kategorier (placeholder).</p>
+    </div>
+    <div class="content-section" id="customer-add">
+      <h3>Lägg till kund</h3>
+      <p>Här kan du lägga till nya kunder (placeholder).</p>
+    </div>
+    <div class="content-section" id="customer-list">
+      <h3>Kundlista</h3>
+      <p>Här kan du se en lista över kunder (placeholder).</p>
+    </div>
+    <div class="content-section" id="order-add">
+      <h3>Lägg till order</h3>
+      <p>Här kan du lägga till nya ordrar (placeholder).</p>
+    </div>
+    <div class="content-section" id="order-list">
+      <h3>Orderlista</h3>
+      <p>Här kan du se en lista över ordrar (placeholder).</p>
+    </div>
+  </div>
+</body>
+</html>
