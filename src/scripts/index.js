@@ -1,198 +1,197 @@
-// import { fetchProducts } from "../utils/api.js"; // API (enable later)
-import dummyProducts from "../data/products-dummy.js";
+const API_BASE = "https://grupp-3.vercel.app/api";
+let allProducts = [];
 
-// Elements
-const container = document.getElementById("products");
-const searchInput = document.getElementById("searchInput");
-const filterBtn = document.querySelector(".filter-bar button");
-const priceBtn = document.querySelector(".price-filter-bar button");
-const filterModal = document.getElementById("filterModal");
-const togglesidebar = document.getElementById("togglesidebar");
+fetchProducts();
+setupSidebarToggle();
+setupModals();
+setupSearch();
+setupFilterButtons();
+setupLoginModal();
 
-// Sidebar toggle (for mobile)
-togglesidebar?.addEventListener("click", () => {
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("show");
-});
-
-// Product rendering logic
-let currentProducts = [...dummyProducts];
-renderByCategory(currentProducts);
-
-// Search
-searchInput?.addEventListener("input", () => {
-  const keyword = searchInput.value.toLowerCase();
-  const filtered = dummyProducts.filter((p) =>
-    p["Product-title"].toLowerCase().includes(keyword)
-  );
-  renderByCategory(filtered);
-});
-
-// Category filter
-filterBtn?.addEventListener("click", () => {
-  renderCategoryModal();
-});
-
-// Price filter
-priceBtn?.addEventListener("click", () => {
-  renderPriceModal();
-});
-
-// Modal close on outside click
-window.addEventListener("click", (e) => {
-  if (e.target === filterModal) {
-    filterModal.classList.add("hidden");
-    filterModal.classList.remove("show");
+async function fetchProducts() {
+  try {
+    const response = await fetch(`${API_BASE}/products`);
+    if (!response.ok) throw new Error("Kunde inte hämta produkter");
+    const products = await response.json();
+    allProducts = normalizeProducts(products);
+    renderByCategory(allProducts);
+  } catch (error) {
+    console.error(error);
+    document.getElementById("products").innerHTML = "<p>Fel vid hämtning av produkter.</p>";
   }
-});
+}
 
-// Render by category
+function normalizeProducts(data) {
+  return data.map(p => ({
+    "Product-title": p.title,
+    "Product-description": p.description,
+    "Product-price": p.price.toFixed(2),
+    "Product-weight": p.weight,
+    "Product-producer": p.producer,
+    "Product-category": p.category,
+    "Product-image-url": p.image || "./src/images/products/placeholder.jpg",
+    "Matsmart-url": "#"
+  }));
+}
+
 function renderByCategory(products) {
+  const container = document.getElementById("products");
   container.innerHTML = "";
-  const categories = [...new Set(products.map((p) => p["Category"]))];
+  const categories = [...new Set(products.map(p => p["Product-category"]))];
 
-  categories.forEach((category) => {
+  categories.forEach(category => {
     const heading = document.createElement("h2");
     heading.textContent = category;
     container.appendChild(heading);
 
     const row = document.createElement("div");
     row.className = "product-row";
-
-    const items = products.filter((p) => p["Category"] === category);
-    items.forEach((product) => {
-      row.appendChild(createProductCard(product));
-    });
+    products.filter(p => p["Product-category"] === category)
+            .forEach(p => row.appendChild(createProductCard(p)));
 
     container.appendChild(row);
   });
 }
 
-// Create product card (for dummyProducts)
 function createProductCard(product) {
   const card = document.createElement("div");
   card.className = "product-card";
-
   card.innerHTML = `
-    <img src="${product["Product-image-url"]}" alt="${product["Product-title"]}"
-         onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
+    <img src="${product["Product-image-url"]}" alt="${product["Product-title"]}" onerror="this.onerror=null;this.src='./src/images/products/placeholder.jpg';" />
     <h3>${product["Product-title"]}</h3>
     <h4>${product["Product-description"]}</h4>
-    <p><strong>${product["Product-price"]}</strong></p>
-    <p class="product-meta">${product["Product-weight"]} &middot; ${product["Product-producer"]}</p>
+    <p><strong>${product["Product-price"]} kr</strong></p>
+    <p class="product-meta">${product["Product-weight"]} · ${product["Product-producer"]}</p>
     <a href="${product["Matsmart-url"]}" target="_blank">
       <button>Lägg i kundvagn</button>
     </a>
   `;
-
   return card;
 }
 
-// Category filter modal
+function setupSearch() {
+  const input = document.getElementById("searchInput");
+  input?.addEventListener("input", () => {
+    const keyword = input.value.toLowerCase();
+    const filtered = allProducts.filter(p =>
+      p["Product-title"].toLowerCase().includes(keyword)
+    );
+    renderByCategory(filtered);
+  });
+}
+
+function setupFilterButtons() {
+  document.getElementById("filterBtn")?.addEventListener("click", renderCategoryModal);
+  document.getElementById("priceFilterBtn")?.addEventListener("click", renderPriceModal);
+}
+
+function setupModals() {
+  window.addEventListener("click", e => {
+    const modal = document.getElementById("filterModal");
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+      modal.classList.remove("show");
+    }
+  });
+}
+
 function renderCategoryModal() {
-  filterModal.innerHTML = `
+  const modal = document.getElementById("filterModal");
+  const categories = [...new Set(allProducts.map(p => p["Product-category"]))];
+  modal.innerHTML = `
     <div class="modal-content">
       <span class="close-btn modal-close-btn">&times;</span>
       <h3>Välj kategori</h3>
       <ul id="categoryList">
         <li><button data-category="all">Alla</button></li>
-        ${[...new Set(dummyProducts.map((p) => p.Category))]
-          .map(
-            (cat) => `<li><button data-category="${cat}">${cat}</button></li>`
-          )
-          .join("")}
+        ${categories.map(cat => `<li><button data-category="${cat}">${cat}</button></li>`).join("")}
       </ul>
     </div>
   `;
-  filterModal.classList.remove("hidden");
-  filterModal.classList.add("show");
+  modal.classList.replace("hidden", "show");
 
-  document.querySelectorAll("#categoryList button").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const selectedCategory = e.target.dataset.category;
-      const filtered =
-        selectedCategory === "all"
-          ? dummyProducts
-          : dummyProducts.filter((p) => p["Category"] === selectedCategory);
+  modal.querySelectorAll("#categoryList button").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const cat = e.target.dataset.category;
+      const filtered = cat === "all" ? allProducts : allProducts.filter(p => p["Product-category"] === cat);
       renderByCategory(filtered);
-      filterModal.classList.add("hidden");
-      filterModal.classList.remove("show");
+      modal.classList.replace("show", "hidden");
     });
   });
 
-  const closeBtn = document.querySelector(".modal-close-btn");
-  closeBtn?.addEventListener("click", () => {
-    filterModal.classList.add("hidden");
-    filterModal.classList.remove("show");
+  modal.querySelector(".modal-close-btn")?.addEventListener("click", () => {
+    modal.classList.replace("show", "hidden");
   });
 }
 
-// Price filter modal
 function renderPriceModal() {
-  const priceRanges = [
+  const modal = document.getElementById("filterModal");
+  const ranges = [
     { label: "1–20 kr", min: 1, max: 20 },
     { label: "21–40 kr", min: 21, max: 40 },
     { label: "41–60 kr", min: 41, max: 60 },
     { label: "61–100 kr", min: 61, max: 100 },
-    { label: "101–180 kr", min: 101, max: 180 },
+    { label: "101–180 kr", min: 101, max: 180 }
   ];
-
-  filterModal.innerHTML = `
+  modal.innerHTML = `
     <div class="modal-content">
       <span class="close-btn modal-close-btn">&times;</span>
       <h3>Välj prisintervall</h3>
       <ul id="priceList">
         <li><button data-min="0" data-max="10000">Alla</button></li>
-        ${priceRanges
-          .map(
-            (range) =>
-              `<li><button data-min="${range.min}" data-max="${range.max}">${range.label}</button></li>`
-          )
-          .join("")}
+        ${ranges.map(r => `<li><button data-min="${r.min}" data-max="${r.max}">${r.label}</button></li>`).join("")}
       </ul>
     </div>
   `;
-  filterModal.classList.remove("hidden");
-  filterModal.classList.add("show");
+  modal.classList.replace("hidden", "show");
 
-  document.querySelectorAll("#priceList button").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const min = parseInt(e.target.dataset.min);
-      const max = parseInt(e.target.dataset.max);
-      const filtered = dummyProducts.filter((p) => {
+  modal.querySelectorAll("#priceList button").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const min = parseFloat(e.target.dataset.min);
+      const max = parseFloat(e.target.dataset.max);
+      const filtered = allProducts.filter(p => {
         const price = parseFloat(p["Product-price"].replace(",", "."));
         return price >= min && price <= max;
       });
       renderByCategory(filtered);
-      filterModal.classList.add("hidden");
-      filterModal.classList.remove("show");
+      modal.classList.replace("show", "hidden");
     });
   });
 
-  const closeBtn = document.querySelector(".modal-close-btn");
-  closeBtn?.addEventListener("click", () => {
-    filterModal.classList.add("hidden");
-    filterModal.classList.remove("show");
+  modal.querySelector(".modal-close-btn")?.addEventListener("click", () => {
+    modal.classList.replace("show", "hidden");
   });
 }
 
-/*
-To enable backend API later, uncomment and use this:
-async function loadProducts() {
-  const container = document.getElementById("products");
-  container.innerHTML = "<p>Loading products...</p>";
-
-  try {
-    const products = await fetchProducts();
-    container.innerHTML = "";
-    if (products.length > 0) {
-      renderByCategory(products);
-    } else {
-      container.innerHTML = "<p>No products available.</p>";
-    }
-  } catch (err) {
-    console.error("Error fetching products:", err);
-    container.innerHTML = "<p>Failed to load products.</p>";
-  }
+function setupSidebarToggle() {
+  document.getElementById("togglesidebar")?.addEventListener("click", () => {
+    document.getElementById("sidebar")?.classList.toggle("show");
+  });
 }
-*/
+
+function setupLoginModal() {
+  const loginModal = document.getElementById("loginModal");
+  const registerModal = document.getElementById("registerModal");
+  const openLoginBtn = document.getElementById("openLoginModal");
+  const openRegisterBtn = document.getElementById("openRegisterModal");
+  const closeLoginBtn = document.getElementById("closeLoginModal");
+  const closeRegisterBtn = document.getElementById("closeRegisterModal");
+
+  openLoginBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    loginModal.classList.replace("hidden", "show");
+  });
+
+  closeLoginBtn?.addEventListener("click", () => {
+    loginModal.classList.replace("show", "hidden");
+  });
+
+  openRegisterBtn?.addEventListener("click", () => {
+    loginModal.classList.replace("show", "hidden");
+    registerModal.classList.replace("hidden", "show");
+  });
+
+  closeRegisterBtn?.addEventListener("click", () => {
+    registerModal.classList.replace("show", "hidden");
+  });
+} 
