@@ -1,11 +1,47 @@
+//import { fetchCategories } from "/src/utils/api.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".card");
     const desktopNavLinks = document.querySelectorAll(".desktop-nav ul li a");
     const contentSections = document.querySelectorAll(".content-section");
-  
     const bottomNavParents = document.querySelectorAll(".has-submenu");
     const bottomNavSubLinks = document.querySelectorAll(".sub-menu li a");
-  
+    
+async function fetchCategories() {
+  //! DONT USE THIS IN PRODUCTION
+  const url = `https://grupp-3.vercel.app/api/categories`;
+  const response = await fetch(url);
+  if(response.ok){
+    const data = await response.json();
+    return data;
+  }
+  return [];    
+}
+
+async function loadCategories() {
+  const categoriesContainer = document.getElementById("categories");
+
+  try {
+    const categories = await fetchCategories();
+    categoriesContainer.innerHTML = ""; // Clear loading text
+
+    if (categories.length > 0) {
+      categories.forEach((category) => {
+          const element = document.createElement("option");
+          element.innerHTML = category.name;
+          categoriesContainer.appendChild(element);
+      });
+    } else {
+      categoriesContainer.innerHTML = "<p>No categories available.</p>";
+    }
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    categoriesContainer.innerHTML = "<p>Failed to load categories.</p>";
+  }
+}
+
+ loadCategories()
+
     function hideAllSections() {
       contentSections.forEach((section) => {
         section.style.display = "none";
