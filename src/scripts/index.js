@@ -1,4 +1,4 @@
-// import { fetchProducts } from "../utils/api.js"; // API (enable later)
+import { fetchProducts, fetchCategories } from "../utils/api.js"; // API (enable later)
 import dummyProducts from "../data/products-dummy.js";
 
 // Elements
@@ -14,6 +14,12 @@ togglesidebar?.addEventListener("click", () => {
   const sidebar = document.getElementById("sidebar");
   sidebar.classList.toggle("show");
 });
+const products = await fetchProducts();
+console.log(products);
+
+const categories = await fetchCategories();
+console.log(categories);
+
 
 // Product rendering logic
 let currentProducts = [...dummyProducts];
@@ -96,7 +102,7 @@ function renderCategoryModal() {
       <h3>Välj kategori</h3>
       <ul id="categoryList">
         <li><button data-category="all">Alla</button></li>
-        ${[...new Set(dummyProducts.map((p) => p.Category))]
+        ${[...new Set(categories.map((p) => p.name))]
           .map(
             (cat) => `<li><button data-category="${cat}">${cat}</button></li>`
           )
@@ -175,24 +181,3 @@ function renderPriceModal() {
     filterModal.classList.remove("show");
   });
 }
-
-/*
-To enable backend API later, uncomment and use this:
-async function loadProducts() {
-  const container = document.getElementById("products");
-  container.innerHTML = "<p>Loading products...</p>";
-
-  try {
-    const products = await fetchProducts();
-    container.innerHTML = "";
-    if (products.length > 0) {
-      renderByCategory(products);
-    } else {
-      container.innerHTML = "<p>No products available.</p>";
-    }
-  } catch (err) {
-    console.error("Error fetching products:", err);
-    container.innerHTML = "<p>Failed to load products.</p>";
-  }
-}
-*/
