@@ -16,3 +16,15 @@ export async function fetchProducts(endpoint = "api/products") {
   }
   return [];    
 }
+
+
+export async function fetchCategories(endpoint = "api/categories") {
+  //! DONT USE THIS IN PRODUCTION 
+  const url = `${getBaseUrl()}${endpoint}`;
+  const response = await fetch(url);
+  if(response.ok){
+    const data = await response.json();
+    return data;
+  }
+  return [];    
+}
