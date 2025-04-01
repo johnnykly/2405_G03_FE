@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Hakim Livs - Adminpanel</title>
   <link rel="stylesheet" href="admin.css" />
-  <script defer src="admin.js"></script>
+  <script defer type="module" src="admin.js"></script> 
 </head>
 <body>
 
@@ -36,12 +36,12 @@
         <li>
           <a href="#" data-section="customer-list">Se kundlista</a>
         </li>
-        <li class="menu-header">Order</li>
+        <li class="menu-header">Beställningar</li>
         <li>
-          <a href="#" data-section="order-add">Lägg till order</a>
+          <a href="#" data-section="order-add">Lägg till beställning</a>
         </li>
         <li>
-          <a href="#" data-section="order-list">Se orderlista</a>
+          <a href="#" data-section="order-list">Se orderhistorik</a>
         </li>
       </ul>
     </nav>
@@ -138,10 +138,32 @@
 
         <div class="button-group">
           <button type="submit" class="btn btn-primary">Lägg till produkt</button>
-          <button type="button" class="btn btn-secondary">Spara utkast</button>
           <button type="button" class="btn btn-cancel">Avbryt</button>
         </div>
       </form>
+    </div>
+
+    <div class="content-section" id="product-list">
+      <h3>Produktlista</h3>
+      
+      <table class="product-table"> 
+        <thead>
+          <tr>
+            <th>Kategori</th>
+            <th>Titel</th>
+            <th>Producent</th>
+            <th>Vikt</th>
+            <th>Beskrivning</th>
+            <th>kr/st</th>
+            <th>Åtgärder</th> 
+          </tr>
+        </thead>
+        <tbody id="productListBody">
+          </tbody>
+      </table>
+    
+      <p id="productListError" class="error-message" style="color: red; display: none;"></p> 
+    
     </div>
 
 <!-- KATEGORIER -->
@@ -165,5 +187,30 @@
 <!-- HÄR SKA DET FETCHAS OCH KUNNA PUSHAS BESTÄLLNINGAR-->
     </div>
   </div>
+
+  <nav class="mobile-nav">
+    <ul>
+      <li>
+        <a href="#" data-section="product-list"> 
+          <span>Produkter</span> 
+        </a>
+      </li>
+      <li>
+        <a href="#" data-section="category-list">
+          <span>Kategorier</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-section="customer-list"> 
+          <span>Kunder</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-section="order-list">
+          <span>Order</span>
+        </a>
+      </li>
+      </ul>
+  </nav>
 </body>
 </html>
