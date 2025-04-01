@@ -1,5 +1,5 @@
 
-  Colors (for reference):
+  /*Colors (for reference):
   -- Navy: #001E62
   -- Red: #F70035
   -- Blue: #2426CC
@@ -8,7 +8,7 @@
   -- White: #FFFFFF
   -- Black: #000000
   -- Off White: #F7F7F7
-
+*/
 
 * {
     margin: 0;
@@ -26,7 +26,10 @@
     min-height: 100vh;
   }
   
-  
+  textarea {
+    resize: none;
+  }
+
   .sidebar {
     width: 250px;
     background-color: #EFEFEF;
