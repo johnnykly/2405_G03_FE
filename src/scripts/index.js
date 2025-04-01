@@ -1,5 +1,32 @@
 import { fetchProducts, fetchCategories } from "../utils/api.js";
 
+document.addEventListener("DOMContentLoaded", loadCategories);
+
+// Function to fetch and render products
+async function loadCategories() {
+  const categoriesContainer = document.querySelector("#categorylist");
+  categoriesContainer.innerHTML = "<p>Loading category...</p>"; // Temporary message while loading
+
+  try {
+    const categories = await fetchCategories();
+    categoriesContainer.innerHTML = ""; // Clear loading text
+    if (categories.length > 0) {
+      categories.forEach((category) => {
+        //const categoriesList = createCategoriesList(category);
+        const element = document.createElement("div");
+        element.className = category.name;
+        element.innerHTML = `<button id="${category.name}">${category.name}</button>`;
+        categoriesContainer.appendChild(element);
+      });
+    } else {
+      categoriesContainer.innerHTML = "<p>No categories available.</p>";
+    }
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    categoriesContainer.innerHTML = "<p>Failed to load categories.</p>";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", loadProducts);
 
 // Function to fetch and render products
