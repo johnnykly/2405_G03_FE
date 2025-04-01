@@ -1,6 +1,25 @@
 import { fetchProducts, fetchCategories } from "../utils/api.js";
 
 document.addEventListener("DOMContentLoaded", loadCategories);
+let selectedCategory = "Alla kategorier";
+//loadCategories();
+
+
+document.querySelectorAll("#categorylist").forEach((btn) => {
+  //console.log(btn);
+   btn.addEventListener("click", (e) => {
+    selectedCategory = e.target.id;
+    //selectedCategory = e.target.innerHTML;
+    console.log(selectedCategory);
+    //selectedCategory = "alla";
+    filterProducts(selectedCategory);
+  }); 
+});
+
+
+filterProducts(selectedCategory)
+
+
 
 // Function to fetch and render products
 async function loadCategories() {
@@ -9,8 +28,13 @@ async function loadCategories() {
 
   try {
     const categories = await fetchCategories();
+    console.log(categories);
     categoriesContainer.innerHTML = ""; // Clear loading text
     if (categories.length > 0) {
+      const element = document.createElement("div");
+      element.className = "Alla kategorier";
+      element.innerHTML = `<button id="Alla kategorier">Alla kategorier</button>`;
+      categoriesContainer.appendChild(element);
       categories.forEach((category) => {
         //const categoriesList = createCategoriesList(category);
         const element = document.createElement("div");
@@ -29,13 +53,32 @@ async function loadCategories() {
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 
+async function filterProducts(category) {
+  const products = await fetchProducts();
+  //console.log(products);
+  //console.log(category);
+  if (category === "Alla kategorier") {
+    let filterdProducts = products.filter((prod) => prod.category);
+    loadProducts(filterdProducts);
+    console.log(filterdProducts);
+    //return filterdProducts;
+  } else {
+    let filterdProducts = products.filter((prod) => prod.category === category);
+    loadProducts(filterdProducts);
+    console.log(filterdProducts);
+    //return filterdProducts;
+  }
+}
+
 // Function to fetch and render products
-async function loadProducts() {
+async function loadProducts(filterdProducts) {
   const productsContainer = document.getElementById("products");
   productsContainer.innerHTML = "<p>Loading products...</p>"; // Temporary message while loading
 
   try {
-    const products = await fetchProducts();
+    //const products = await fetchProducts();
+    //const products = await filterProducts(category);
+    let products = filterdProducts;
     productsContainer.innerHTML = ""; // Clear loading text
     if (products.length > 0) {
       products.forEach((product) => {
