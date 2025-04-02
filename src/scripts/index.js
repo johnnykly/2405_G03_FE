@@ -1,197 +1,152 @@
-const API_BASE = "https://grupp-3.vercel.app/api";
-let allProducts = [];
+import { fetchProducts, fetchCategories } from "../utils/api.js";
 
-fetchProducts();
-setupSidebarToggle();
-setupModals();
-setupSearch();
-setupFilterButtons();
-setupLoginModal();
+//document.addEventListener("DOMContentLoaded", loadCategories);
+let selectedCategory = "Alla kategorier";
 
-async function fetchProducts() {
+loadCategories();
+
+document.querySelectorAll("#categorylist").forEach((btn) => {
+  //console.log(btn);
+  btn.addEventListener("click", (e) => {
+    selectedCategory = e.target.id;
+    //selectedCategory = e.target.innerHTML;
+    console.log(selectedCategory);
+    //selectedCategory = "alla";
+    filterProducts(selectedCategory);
+  });
+});
+
+filterProducts(selectedCategory);
+
+// Function to fetch and render products
+async function loadCategories() {
+  const categoriesContainer = document.querySelector("#categorylist");
+  categoriesContainer.innerHTML = "<p>Loading category...</p>"; // Temporary message while loading
+
   try {
-    const response = await fetch(`${API_BASE}/products`);
-    if (!response.ok) throw new Error("Kunde inte hämta produkter");
-    const products = await response.json();
-    allProducts = normalizeProducts(products);
-    renderByCategory(allProducts);
+    const categories = await fetchCategories();
+    console.log(categories);
+    categoriesContainer.innerHTML = ""; // Clear loading text
+    if (categories.length > 0) {
+      const element = document.createElement("div");
+      element.className = "Alla kategorier";
+      element.innerHTML = `<button id="Alla kategorier">Alla kategorier</button>`;
+      categoriesContainer.appendChild(element);
+      categories.forEach((category) => {
+        //const categoriesList = createCategoriesList(category);
+        const element = document.createElement("div");
+        element.className = category.name
+          .replace("Hem & Hushåll", "Hem & hushåll")
+          .replace("Snacks & Godis", "Snacks och godis");
+        element.innerHTML = `<button id="${category.name
+          .replace("Hem & Hushåll", "Hem & hushåll")
+          .replace("Snacks & Godis", "Snacks och godis")}">${category.name
+          .replace("Hem & Hushåll", "Hem & hushåll")
+          .replace("Snacks & Godis", "Snacks och godis")}</button>`;
+        categoriesContainer.appendChild(element);
+      });
+    } else {
+      categoriesContainer.innerHTML = "<p>No categories available.</p>";
+    }
   } catch (error) {
-    console.error(error);
-    document.getElementById("products").innerHTML = "<p>Fel vid hämtning av produkter.</p>";
+    console.error("Error fetching categories:", error);
+    categoriesContainer.innerHTML = "<p>Failed to load categories.</p>";
   }
 }
 
-function normalizeProducts(data) {
-  return data.map(p => ({
-    "Product-title": p.title,
-    "Product-description": p.description,
-    "Product-price": p.price.toFixed(2),
-    "Product-weight": p.weight,
-    "Product-producer": p.producer,
-    "Product-category": p.category,
-    "Product-image-url": p.image || "./src/images/products/placeholder.jpg",
-    "Matsmart-url": "#"
-  }));
+document.addEventListener("DOMContentLoaded", loadProducts);
+
+async function filterProducts(category) {
+  const products = await fetchProducts();
+  //console.log(products);
+  //console.log(category);
+  if (category === "Alla kategorier" || category === "") {
+    let filterdProducts = products.filter((prod) => prod.category);
+    loadProducts(filterdProducts);
+    console.log(filterdProducts);
+    //return filterdProducts;
+  } else {
+    let filterdProducts = products.filter((prod) => prod.category === category);
+    loadProducts(filterdProducts);
+    console.log(filterdProducts);
+    //return filterdProducts;
+  }
 }
 
-function renderByCategory(products) {
-  const container = document.getElementById("products");
-  container.innerHTML = "";
-  const categories = [...new Set(products.map(p => p["Product-category"]))];
+// Function to fetch and render products
+async function loadProducts(filterdProducts) {
+  const productsContainer = document.getElementById("products");
+  productsContainer.innerHTML = "<p>Loading products...</p>"; // Temporary message while loading
 
-  categories.forEach(category => {
-    const heading = document.createElement("h2");
-    heading.textContent = category;
-    container.appendChild(heading);
-
-    const row = document.createElement("div");
-    row.className = "product-row";
-    products.filter(p => p["Product-category"] === category)
-            .forEach(p => row.appendChild(createProductCard(p)));
-
-    container.appendChild(row);
-  });
-}
-
-function createProductCard(product) {
-  const card = document.createElement("div");
-  card.className = "product-card";
-  card.innerHTML = `
-    <img src="${product["Product-image-url"]}" alt="${product["Product-title"]}" onerror="this.onerror=null;this.src='./src/images/products/placeholder.jpg';" />
-    <h3>${product["Product-title"]}</h3>
-    <h4>${product["Product-description"]}</h4>
-    <p><strong>${product["Product-price"]} kr</strong></p>
-    <p class="product-meta">${product["Product-weight"]} · ${product["Product-producer"]}</p>
-    <a href="${product["Matsmart-url"]}" target="_blank">
-      <button>Lägg i kundvagn</button>
-    </a>
-  `;
-  return card;
-}
-
-function setupSearch() {
-  const input = document.getElementById("searchInput");
-  input?.addEventListener("input", () => {
-    const keyword = input.value.toLowerCase();
-    const filtered = allProducts.filter(p =>
-      p["Product-title"].toLowerCase().includes(keyword)
-    );
-    renderByCategory(filtered);
-  });
-}
-
-function setupFilterButtons() {
-  document.getElementById("filterBtn")?.addEventListener("click", renderCategoryModal);
-  document.getElementById("priceFilterBtn")?.addEventListener("click", renderPriceModal);
-}
-
-function setupModals() {
-  window.addEventListener("click", e => {
-    const modal = document.getElementById("filterModal");
-    if (e.target === modal) {
-      modal.classList.add("hidden");
-      modal.classList.remove("show");
-    }
-  });
-}
-
-function renderCategoryModal() {
-  const modal = document.getElementById("filterModal");
-  const categories = [...new Set(allProducts.map(p => p["Product-category"]))];
-  modal.innerHTML = `
-    <div class="modal-content">
-      <span class="close-btn modal-close-btn">&times;</span>
-      <h3>Välj kategori</h3>
-      <ul id="categoryList">
-        <li><button data-category="all">Alla</button></li>
-        ${categories.map(cat => `<li><button data-category="${cat}">${cat}</button></li>`).join("")}
-      </ul>
-    </div>
-  `;
-  modal.classList.replace("hidden", "show");
-
-  modal.querySelectorAll("#categoryList button").forEach(btn => {
-    btn.addEventListener("click", e => {
-      const cat = e.target.dataset.category;
-      const filtered = cat === "all" ? allProducts : allProducts.filter(p => p["Product-category"] === cat);
-      renderByCategory(filtered);
-      modal.classList.replace("show", "hidden");
-    });
-  });
-
-  modal.querySelector(".modal-close-btn")?.addEventListener("click", () => {
-    modal.classList.replace("show", "hidden");
-  });
-}
-
-function renderPriceModal() {
-  const modal = document.getElementById("filterModal");
-  const ranges = [
-    { label: "1–20 kr", min: 1, max: 20 },
-    { label: "21–40 kr", min: 21, max: 40 },
-    { label: "41–60 kr", min: 41, max: 60 },
-    { label: "61–100 kr", min: 61, max: 100 },
-    { label: "101–180 kr", min: 101, max: 180 }
-  ];
-  modal.innerHTML = `
-    <div class="modal-content">
-      <span class="close-btn modal-close-btn">&times;</span>
-      <h3>Välj prisintervall</h3>
-      <ul id="priceList">
-        <li><button data-min="0" data-max="10000">Alla</button></li>
-        ${ranges.map(r => `<li><button data-min="${r.min}" data-max="${r.max}">${r.label}</button></li>`).join("")}
-      </ul>
-    </div>
-  `;
-  modal.classList.replace("hidden", "show");
-
-  modal.querySelectorAll("#priceList button").forEach(btn => {
-    btn.addEventListener("click", e => {
-      const min = parseFloat(e.target.dataset.min);
-      const max = parseFloat(e.target.dataset.max);
-      const filtered = allProducts.filter(p => {
-        const price = parseFloat(p["Product-price"].replace(",", "."));
-        return price >= min && price <= max;
+  try {
+    //const products = await fetchProducts();
+    //const products = await filterProducts(category);
+    let products = filterdProducts;
+    productsContainer.innerHTML = ""; // Clear loading text
+    if (products.length > 0) {
+      products.forEach((product) => {
+        const productCard = createProductCard(product);
+        productsContainer.appendChild(productCard);
       });
-      renderByCategory(filtered);
-      modal.classList.replace("show", "hidden");
-    });
-  });
+    } else {
+      productsContainer.innerHTML = "<p>No products available.</p>";
+    }
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    productsContainer.innerHTML = "<p>Failed to load products.</p>";
+  }
 
-  modal.querySelector(".modal-close-btn")?.addEventListener("click", () => {
-    modal.classList.replace("show", "hidden");
-  });
+  let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+  console.log(shoppingCart.length);
+  let cartHeader = document.getElementById("cart-header");
+  let cartMobilemenu = document.getElementById("cart-mobilemenu");
+  cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+  cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
 }
 
-function setupSidebarToggle() {
-  document.getElementById("togglesidebar")?.addEventListener("click", () => {
-    document.getElementById("sidebar")?.classList.toggle("show");
+// Function to create an individual product card
+function createProductCard(product) {
+  const element = document.createElement("div");
+  element.className = "product-card";
+
+  element.innerHTML = `
+    <img src="${product.image}" alt="${product.title}"
+      onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
+    <h3>${product.title}</h3>
+    <p>${product.price.toFixed(2)} kr</p>
+    <button class="add-to-cart-btn">Add to Cart</button>
+  `;
+
+  element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
+    let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+    if (shoppingCart !== null) {
+      console.log(shoppingCart);
+      shoppingCart.push(product);
+      localStorage.setItem("Products", JSON.stringify(shoppingCart));
+    } else {
+      let products = [];
+      products.push(product);
+      shoppingCart = localStorage.setItem("Products", JSON.stringify(products));
+    }
+
+    shoppingCart = JSON.parse(localStorage.getItem("Products"));
+    console.log(shoppingCart.length);
+    let cartHeader = document.getElementById("cart-header");
+    let cartMobilemenu = document.getElementById("cart-mobilemenu");
+    cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+    cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+
+    alert(`${product.title} har lagts till varukorgen`);
   });
+
+  return element;
 }
 
-function setupLoginModal() {
-  const loginModal = document.getElementById("loginModal");
-  const registerModal = document.getElementById("registerModal");
-  const openLoginBtn = document.getElementById("openLoginModal");
-  const openRegisterBtn = document.getElementById("openRegisterModal");
-  const closeLoginBtn = document.getElementById("closeLoginModal");
-  const closeRegisterBtn = document.getElementById("closeRegisterModal");
+// Function to toggle sidemenu on mobile view
+const togglesidebar = document.getElementById("togglesidebar");
+togglesidebar.addEventListener("click", mySidebarToggle);
 
-  openLoginBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    loginModal.classList.replace("hidden", "show");
-  });
-
-  closeLoginBtn?.addEventListener("click", () => {
-    loginModal.classList.replace("show", "hidden");
-  });
-
-  openRegisterBtn?.addEventListener("click", () => {
-    loginModal.classList.replace("show", "hidden");
-    registerModal.classList.replace("hidden", "show");
-  });
-
-  closeRegisterBtn?.addEventListener("click", () => {
-    registerModal.classList.replace("show", "hidden");
-  });
-} 
+function mySidebarToggle() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("show");
+}
