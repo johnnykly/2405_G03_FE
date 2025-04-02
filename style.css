@@ -90,6 +90,7 @@ aside {
   background-color: #333;
   opacity: 0.99;
   color: white;
+  font-size: 2rem;
 
   .sidebar-items {
     display: grid;
@@ -98,12 +99,12 @@ aside {
     align-self: start;
 
     button {
-      padding: 0px;
-      margin-top: 1rem;
+      padding: 1rem;
       text-decoration: none;
       border: none;
       background-color: #333;
       color: white;
+      font-size: 1.5rem;
     }
     button:active {
       transform: translateY(4px);

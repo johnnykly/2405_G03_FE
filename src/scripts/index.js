@@ -1,25 +1,21 @@
 import { fetchProducts, fetchCategories } from "../utils/api.js";
 
-document.addEventListener("DOMContentLoaded", loadCategories);
+//document.addEventListener("DOMContentLoaded", loadCategories);
 let selectedCategory = "Alla kategorier";
-//loadCategories();
-
+loadCategories();
 
 document.querySelectorAll("#categorylist").forEach((btn) => {
   //console.log(btn);
-   btn.addEventListener("click", (e) => {
+  btn.addEventListener("click", (e) => {
     selectedCategory = e.target.id;
     //selectedCategory = e.target.innerHTML;
     console.log(selectedCategory);
     //selectedCategory = "alla";
     filterProducts(selectedCategory);
-  }); 
+  });
 });
 
-
-filterProducts(selectedCategory)
-
-
+filterProducts(selectedCategory);
 
 // Function to fetch and render products
 async function loadCategories() {
@@ -38,8 +34,8 @@ async function loadCategories() {
       categories.forEach((category) => {
         //const categoriesList = createCategoriesList(category);
         const element = document.createElement("div");
-        element.className = category.name;
-        element.innerHTML = `<button id="${category.name}">${category.name}</button>`;
+        element.className = category.name.replace("Hem & Hushåll", "Hem & hushåll").replace("Snacks & Godis", "Snacks och godis");
+        element.innerHTML = `<button id="${category.name.replace("Hem & Hushåll", "Hem & hushåll").replace("Snacks & Godis", "Snacks och godis")}">${category.name.replace("Hem & Hushåll", "Hem & hushåll").replace("Snacks & Godis", "Snacks och godis")}</button>`;
         categoriesContainer.appendChild(element);
       });
     } else {
@@ -57,7 +53,7 @@ async function filterProducts(category) {
   const products = await fetchProducts();
   //console.log(products);
   //console.log(category);
-  if (category === "Alla kategorier") {
+  if (category === "Alla kategorier" || category === "") {
     let filterdProducts = products.filter((prod) => prod.category);
     loadProducts(filterdProducts);
     console.log(filterdProducts);
@@ -108,6 +104,7 @@ function createProductCard(product) {
   `;
 
   element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
+    
     alert(`Adding ${product.name} to cart\nFunctionality not implemented yet`);
   });
 
