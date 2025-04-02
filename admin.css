@@ -1,14 +1,13 @@
-
-  Colors (for reference):
-  -- Navy: #001E62
-  -- Red: #F70035
-  -- Blue: #2426CC
-  -- Light Gray: #EFEFEF
-  -- Mid Gray: #777777
-  -- White: #FFFFFF
-  -- Black: #000000
-  -- Off White: #F7F7F7
-
+:root {
+  --navy: #001E62;
+  --red: #F70035;
+  --blue: #2426CC;
+  --light-gray: #EFEFEF;
+  --mid-gray: #777777;
+  --white: #FFFFFF;
+  --black: #000000;
+  --off-white: #F7F7F7;
+}
 
 * {
     margin: 0;
@@ -26,7 +25,10 @@
     min-height: 100vh;
   }
   
-  
+  textarea {
+    resize: none;
+  }
+
   .sidebar {
     width: 250px;
     background-color: #EFEFEF;
@@ -116,42 +118,6 @@
     background-color: #ddd;
   }
   
-  .sub-menu {
-    display: none;
-    position: absolute;
-    bottom: 45px; 
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #EFEFEF;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    min-width: 150px;
-  }
-  
-  .sub-menu li {
-    margin: 5px 0;
-  }
-  
-  .sub-menu li a {
-    color: #000;
-    display: block;
-    text-align: left;
-    font-weight: normal;
-    padding: 5px;
-    border-radius: 4px;
-    white-space: nowrap; 
-  }
-  
-  .sub-menu li a:hover {
-    background-color: #ddd;
-  }
-  
-  
-  .has-submenu.open .sub-menu {
-    display: block;
-  }
-
   .main-content {
     flex: 1;
     display: flex;
@@ -297,7 +263,6 @@
     background-color: #001E62;
   }
 
-
   .btn-secondary {
     background-color: #FFFFFF;
     color: #2426CC;
@@ -318,21 +283,66 @@
   }
   
 
-  @media (max-width: 1024px) {
-    .sidebar {
-      display: none;
-    }
-    .mobile-nav {
-      display: block;
-    }
-    .main-content {
-      margin-bottom: 80px;
-    }
+
+.mobile-nav {
+  display: none; 
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #EFEFEF;
+  border-top: 1px solid #ccc; 
+  z-index: 1000;
+}
+
+.mobile-nav ul {
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+}
+
+
+.mobile-nav ul li a {
+  text-decoration: none;
+  color: #000000; 
+  display: block; 
+  padding: 10px 5px;
+  text-align: center;
+}
+
+.mobile-nav ul li a:hover {
+    background-color: #ddd;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none; 
+  }
+  .mobile-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .mobile-nav ul {
+      display: contents;
   }
 
-  @media (max-width: 768px) {
-    .card-container {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .main-content {
+      padding-bottom: 60px; 
   }
-  
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.product-table th, 
+.product-table td {
+  font-size: 0.6rem; 
+  padding: 6px 8px;
+}
+
+.product-table button {
+  font-size: 11px; 
+}
