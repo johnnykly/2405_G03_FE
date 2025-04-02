@@ -2,6 +2,7 @@ import { fetchProducts, fetchCategories } from "../utils/api.js";
 
 //document.addEventListener("DOMContentLoaded", loadCategories);
 let selectedCategory = "Alla kategorier";
+//let shoppingCart = [];
 loadCategories();
 
 document.querySelectorAll("#categorylist").forEach((btn) => {
@@ -34,8 +35,14 @@ async function loadCategories() {
       categories.forEach((category) => {
         //const categoriesList = createCategoriesList(category);
         const element = document.createElement("div");
-        element.className = category.name.replace("Hem & Hushåll", "Hem & hushåll").replace("Snacks & Godis", "Snacks och godis");
-        element.innerHTML = `<button id="${category.name.replace("Hem & Hushåll", "Hem & hushåll").replace("Snacks & Godis", "Snacks och godis")}">${category.name.replace("Hem & Hushåll", "Hem & hushåll").replace("Snacks & Godis", "Snacks och godis")}</button>`;
+        element.className = category.name
+          .replace("Hem & Hushåll", "Hem & hushåll")
+          .replace("Snacks & Godis", "Snacks och godis");
+        element.innerHTML = `<button id="${category.name
+          .replace("Hem & Hushåll", "Hem & hushåll")
+          .replace("Snacks & Godis", "Snacks och godis")}">${category.name
+          .replace("Hem & Hushåll", "Hem & hushåll")
+          .replace("Snacks & Godis", "Snacks och godis")}</button>`;
         categoriesContainer.appendChild(element);
       });
     } else {
@@ -102,10 +109,26 @@ function createProductCard(product) {
     <p>${product.price.toFixed(2)} kr</p>
     <button class="add-to-cart-btn">Add to Cart</button>
   `;
-
+  let shoppingCart = [];
   element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
     
-    alert(`Adding ${product.name} to cart\nFunctionality not implemented yet`);
+    if (localStorage.getItem("Products") !== null) {
+      shoppingCart = localStorage.getItem("Products");
+      shoppingCart.add(product.title);
+      localStorage.setItem("Products", shoppingCart);
+    } else {
+      //let shoppingCart = [];
+      //shoppingCart.push(product.title);
+      localStorage.setItem("Products", shoppingCart);
+      console.log(shoppingCart);
+    }
+
+    const cartHeader = document.getElementById("cart-header");
+    const cartMobilemenu = document.getElementById("cart-mobilemenu");
+    cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+    cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+
+    alert(`${product.title} har lagts till varukorgen`);
   });
 
   return element;
