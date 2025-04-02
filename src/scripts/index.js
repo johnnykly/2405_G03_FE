@@ -6,7 +6,6 @@ setupSidebarToggle();
 setupModals();
 setupSearch();
 setupFilterButtons();
-setupLoginModal();
 
 async function fetchProducts() {
   try {
@@ -46,8 +45,9 @@ function renderByCategory(products) {
 
     const row = document.createElement("div");
     row.className = "product-row";
-    products.filter(p => p["Product-category"] === category)
-            .forEach(p => row.appendChild(createProductCard(p)));
+    products
+      .filter(p => p["Product-category"] === category)
+      .forEach(p => row.appendChild(createProductCard(p)));
 
     container.appendChild(row);
   });
@@ -168,30 +168,3 @@ function setupSidebarToggle() {
     document.getElementById("sidebar")?.classList.toggle("show");
   });
 }
-
-function setupLoginModal() {
-  const loginModal = document.getElementById("loginModal");
-  const registerModal = document.getElementById("registerModal");
-  const openLoginBtn = document.getElementById("openLoginModal");
-  const openRegisterBtn = document.getElementById("openRegisterModal");
-  const closeLoginBtn = document.getElementById("closeLoginModal");
-  const closeRegisterBtn = document.getElementById("closeRegisterModal");
-
-  openLoginBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    loginModal.classList.replace("hidden", "show");
-  });
-
-  closeLoginBtn?.addEventListener("click", () => {
-    loginModal.classList.replace("show", "hidden");
-  });
-
-  openRegisterBtn?.addEventListener("click", () => {
-    loginModal.classList.replace("show", "hidden");
-    registerModal.classList.replace("hidden", "show");
-  });
-
-  closeRegisterBtn?.addEventListener("click", () => {
-    registerModal.classList.replace("show", "hidden");
-  });
-} 

@@ -16,3 +16,4 @@ export async function fetchProducts(endpoint = "api/products") {
   }
   return [];    
 }
+
