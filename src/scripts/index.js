@@ -2,7 +2,7 @@ import { fetchProducts, fetchCategories } from "../utils/api.js";
 
 //document.addEventListener("DOMContentLoaded", loadCategories);
 let selectedCategory = "Alla kategorier";
-//let shoppingCart = [];
+
 loadCategories();
 
 document.querySelectorAll("#categorylist").forEach((btn) => {
@@ -109,22 +109,24 @@ function createProductCard(product) {
     <p>${product.price.toFixed(2)} kr</p>
     <button class="add-to-cart-btn">Add to Cart</button>
   `;
-  let shoppingCart = [];
+
   element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
-    
-    if (localStorage.getItem("Products") !== null) {
-      shoppingCart = localStorage.getItem("Products");
-      shoppingCart.add(product.title);
-      localStorage.setItem("Products", shoppingCart);
-    } else {
-      //let shoppingCart = [];
-      //shoppingCart.push(product.title);
-      localStorage.setItem("Products", shoppingCart);
+    let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+    if (shoppingCart !== null) {
       console.log(shoppingCart);
+      shoppingCart.push(product);
+      localStorage.setItem("Products", JSON.stringify(shoppingCart));
+
+    } else {
+      let products = [];
+      products.push(product);
+      shoppingCart = localStorage.setItem("Products", JSON.stringify(products));
     }
 
-    const cartHeader = document.getElementById("cart-header");
-    const cartMobilemenu = document.getElementById("cart-mobilemenu");
+    shoppingCart = JSON.parse(localStorage.getItem("Products"));
+    console.log(shoppingCart.length);
+    let cartHeader = document.getElementById("cart-header");
+    let cartMobilemenu = document.getElementById("cart-mobilemenu");
     cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
     cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
 
