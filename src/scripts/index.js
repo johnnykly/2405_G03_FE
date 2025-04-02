@@ -95,6 +95,13 @@ async function loadProducts(filterdProducts) {
     console.error("Error fetching products:", error);
     productsContainer.innerHTML = "<p>Failed to load products.</p>";
   }
+
+  let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+  console.log(shoppingCart.length);
+  let cartHeader = document.getElementById("cart-header");
+  let cartMobilemenu = document.getElementById("cart-mobilemenu");
+  cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+  cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
 }
 
 // Function to create an individual product card
@@ -116,7 +123,6 @@ function createProductCard(product) {
       console.log(shoppingCart);
       shoppingCart.push(product);
       localStorage.setItem("Products", JSON.stringify(shoppingCart));
-
     } else {
       let products = [];
       products.push(product);
