@@ -120,7 +120,7 @@ async function loadProductList() {
       return;
   }
 
-  tableBody.innerHTML = `<tr><td colspan="7" style="text-align: left;">Laddar produkter...</td></tr>`; 
+  tableBody.innerHTML = `<tr><td colspan="8" style="text-align: left;">Laddar produkter...</td></tr>`; 
   errorElement.textContent = '';
   errorElement.style.display = 'none';
 
@@ -136,10 +136,10 @@ async function loadProductList() {
               const title = product.title || 'Ingen titel';
               const producer = product.producer || '-';
               const weight = product.weight || '-';
-
               const description = product.description || '-'; 
               const price = typeof product.price === 'number' ? product.price.toFixed(2) : 'N/A'; 
               const productId = product._id || null; 
+              const stock = product._stock || null; 
 
               row.innerHTML = `
                   <td>${category}</td>
@@ -148,6 +148,7 @@ async function loadProductList() {
                   <td>${weight}</td>
                   <td>${description}</td> 
                   <td>${price}</td>
+                  <td>${stock}</td>
                   <td>
                       <button class="btn-edit" data-id="${productId}" ${!productId ? 'disabled' : ''}>Redigera</button>
                       <button class="btn-delete" data-id="${productId}" ${!productId ? 'disabled' : ''}>Ta bort</button>
@@ -157,7 +158,7 @@ async function loadProductList() {
               tableBody.appendChild(row);
           });
       } else {
-          tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center;">Inga produkter hittades.</td></tr>`;
+          tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center;">Inga produkter hittades.</td></tr>`;
       }
 
   } catch (error) {
