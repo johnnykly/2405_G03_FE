@@ -122,9 +122,11 @@ function createProductCard(product) {
 
   let shoppingCart = JSON.parse(localStorage.getItem("Products"));
 
-  for (let i = 0; i < shoppingCart.length; i++) {
-    if (shoppingCart[i].title === product.title) {
-      cartValue++;
+  if (shoppingCart !== null) {
+    for (let i = 0; i < shoppingCart.length; i++) {
+      if (shoppingCart[i].title === product.title) {
+        cartValue++;
+      }
     }
   }
 
