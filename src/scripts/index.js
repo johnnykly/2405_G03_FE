@@ -143,9 +143,9 @@ function createProductCard(product) {
     </div>
     <div id="cardbutton" class="card-button"><button class="add-to-cart-btn">Köp</button></div>
   `;
-  element.querySelector(".cart-button-array").style.display = "flex";
-  element.querySelector("#cardbutton").style.display = "none";
-  cartValue = 0;
+    element.querySelector(".cart-button-array").style.display = "flex";
+    element.querySelector("#cardbutton").style.display = "none";
+    cartValue = 0;
   } else {
     element.innerHTML = `
     <img src="${product.image}" alt="${product.title}"
@@ -199,6 +199,10 @@ function createProductCard(product) {
       element.querySelector(".cart-button-array").style.display = "none";
       element.querySelector("#cardbutton").style.display = "block";
     }
+
+    if (shoppingCart.length === 0) {
+      localStorage.removeItem("Products");
+    }
   });
 
   element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
@@ -237,3 +241,32 @@ function mySidebarToggle() {
   const sidebar = document.getElementById("sidebar");
   sidebar.classList.toggle("show");
 }
+
+document.querySelector("#cart-header").addEventListener("click", () => {
+  document.querySelector(".cart-content").style.display = "block";
+  let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+  const cartContainer = document.querySelector(".cart-list");
+
+  cartContainer.innerHTML = "";
+  const element = document.createElement("h1");
+  element.innerHTML = `Varukorg`;
+  cartContainer.appendChild(element);
+
+  if (!shoppingCart) {
+    const cartContainer2 = document.querySelector(".cart-list");
+    const element2 = document.createElement("div");
+    element2.innerHTML = `Varukorgen är tom`;
+    cartContainer2.appendChild(element2);
+  } else {
+    shoppingCart.forEach((product) => {
+      const element = document.createElement("div");
+      element.className = product.title;
+      element.innerHTML = `<div>${product.title}</div>`;
+      cartContainer.appendChild(element);
+    });
+  }
+});
+
+document.querySelector(".cart-background").addEventListener("click", () => {
+  document.querySelector(".cart-content").style.display = "none";
+});
