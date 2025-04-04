@@ -120,18 +120,44 @@ function createProductCard(product) {
   let cartValue = 0;
   element.className = "product-card";
 
-  element.innerHTML = `
+  let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+
+  for (let i = 0; i < shoppingCart.length; i++) {
+    if (shoppingCart[i].title === product.title) {
+      cartValue++;
+    }
+  }
+
+  if (shoppingCart !== null && cartValue > 0) {
+    element.innerHTML = `
     <img src="${product.image}" alt="${product.title}"
       onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
     <h3>${product.title}</h3>
     <p>${product.price.toFixed(2)} kr</p>
     <div class="cart-button-array">
       <div id="cartbuttonminus" class="cart-button-minus">-</div>
-      <div id="cartbuttoncount" class="cart-button-count"></div>
+      <div id="cartbuttoncount" class="cart-button-count">Varukorg (${cartValue})</div>
       <div id="cartbuttonplus" class="cart-button-plus">+</div>
     </div>
     <div id="cardbutton" class="card-button"><button class="add-to-cart-btn">Köp</button></div>
   `;
+  element.querySelector(".cart-button-array").style.display = "flex";
+  element.querySelector("#cardbutton").style.display = "none";
+  cartValue = 0;
+  } else {
+    element.innerHTML = `
+    <img src="${product.image}" alt="${product.title}"
+      onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
+    <h3>${product.title}</h3>
+    <p>${product.price.toFixed(2)} kr</p>
+    <div class="cart-button-array">
+      <div id="cartbuttonminus" class="cart-button-minus">-</div>
+      <div id="cartbuttoncount" class="cart-button-count">Varukorg (0)</div>
+      <div id="cartbuttonplus" class="cart-button-plus">+</div>
+    </div>
+    <div id="cardbutton" class="card-button"><button class="add-to-cart-btn">Köp</button></div>
+  `;
+  }
 
   element.querySelector(".cart-button-plus").addEventListener("click", () => {
     cartValue++;
