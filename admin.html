@@ -3,46 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <title>Hakim Livs - Adminpanel</title>
-  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="/admin.css" /> 
   <script defer type="module" src="/src/scripts/admin.js"></script> 
+  <link rel="icon" type="image/x-icon" href="/src/images/hakimlivs-logo-favico.png">
 </head>
 <body>
 
   <div class="sidebar">
     <div class="logo">
-      <h1>HAKIM LIVS</h1>
+      <img src="/src/images/hakimlivs-logo-full.png" class="sidebar-logo" alt="HAKIM LIVS">
     </div>
     <h2 class="menu-title">Navigation</h2>
     <nav class="desktop-nav">
       <ul>
         <li class="menu-header">Produkter</li>
-        <li>
-          <a href="#" data-section="product-add">Lägg till produkt</a>
-        </li>
-        <li>
-          <a href="#" data-section="product-list">Se produktlista</a>
-        </li>
+        <li> <a href="#" data-section="product-add">Lägg till produkt</a> </li>
+        <li> <a href="#" data-section="product-list">Se produktlista</a> </li>
         <li class="menu-header">Kategorier</li>
-        <li>
-          <a href="#" data-section="category-add">Lägg till kategori</a>
-        </li>
-        <li>
-          <a href="#" data-section="category-list">Se kategorilista</a>
-        </li>
+        <li> <a href="#" data-section="category-add">Lägg till kategori</a> </li>
+        <li> <a href="#" data-section="category-list">Se kategorilista</a> </li>
         <li class="menu-header">Kunder</li>
-        <li>
-          <a href="#" data-section="customer-add">Lägg till kund</a>
-        </li>
-        <li>
-          <a href="#" data-section="customer-list">Se kundlista</a>
-        </li>
+        <li> <a href="#" data-section="customer-add">Lägg till kund</a> </li>
+        <li> <a href="#" data-section="customer-list">Se kundlista</a> </li>
         <li class="menu-header">Beställningar</li>
-        <li>
-          <a href="#" data-section="order-add">Lägg till beställning</a>
-        </li>
-        <li>
-          <a href="#" data-section="order-list">Se orderhistorik</a>
-        </li>
+        <li> <a href="#" data-section="order-add">Lägg till beställning</a> </li>
+        <li> <a href="#" data-section="order-list">Se orderhistorik</a> </li>
       </ul>
     </nav>
   </div>
@@ -50,92 +35,24 @@
   <div class="main-content">
     <h2 class="main-title">SNABBNAVIGATION</h2>
     <div class="card-container">
-      <div class="card" data-section="product-add">
-        <p>Lägg till ny produkt</p>
-      </div>
-      <div class="card" data-section="category-add">
-        <p>Lägg till kategori</p>
-      </div>
-      <div class="card" data-section="customers">
-        <p>Kunder</p>
-      </div>
-      <div class="card" data-section="order-history">
-        <p>Orderhistorik</p>
-      </div>
-    </div>
+      <div class="card" data-section="product-add"> <p>Lägg till ny produkt</p> </div>
+      <div class="card" data-section="category-add"> <p>Lägg till kategori</p> </div>
+      <div class="card" data-section="customer-list"> <p>Kunder</p> </div> <div class="card" data-section="order-list"> <p>Orderhistorik</p> </div> </div>
 
     <div class="content-section" id="product-add">
       <h3>Lägg till ny produkt</h3>
       <form id="addProductForm">
         
-        <div class="form-group">
-          <label for="productTitle">Titel</label>
-          <input 
-          type="text" 
-          id="productTitle" 
-          name="productTitle" 
-          placeholder="Lägg till produktens namn"
-          />
-        </div>
+        <div class="form-group"> <label for="productTitle">Titel</label> <input type="text" id="productTitle" name="productTitle" placeholder="Lägg till produktens namn" /> </div>
+        <div class="form-group"> <label for="categories">Kategori</label> <select name="categories" id="categories"> </select> </div>
+        <div class="form-group"> <label for="productProducer">Producent</label> <input type="text" id="productProducer" name="productProducer" placeholder="Lägg till produktens producent" /> </div>
+        <div class="form-group"> <label for="productWeight">Vikt</label> <input type="text" id="productWeight" name="productWeight" placeholder="Specificera producera vikt och viktenhet per st" /> </div>
+        <div class="form-group"> <label for="productDescription">Beskrivning</label> <textarea id="productDescription" name="productDescription" rows="4" placeholder="Lägg till produktbeskrivning"></textarea> </div>
+        
+        <div class="form-group"> <label for="forsaljningspris">Pris</label> <div class="price-group"> <input type="text" id="forsaljningspris" name="forsaljningspris" placeholder="Försäljningspris i kr per st" /> </div> </div>
+        <div class="form-group"> <label for="lager">Lager</label> <div class="price-stock"> <input type="text" id="lager" name="lager" placeholder="Lagersaldo" /> </div> </div>
 
-        <div class="form-group">
-          <label for="categories">Kategori</label>
-        <select name="categories" id="categories">        
-        </select>
-        </div>
-
-        <div class="form-group">
-          <label for="productProducer">Producent</label>
-          <input 
-          type="text" 
-          id="productProducer" 
-          name="productProducer" 
-          placeholder="Lägg till produktens producent"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="productWeight">Vikt</label>
-          <input 
-          type="text" 
-          id="productWeight" 
-          name="productWeight"
-          placeholder="Specificera producera vikt och viktenhet per st"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="productDescription">Beskrivning</label>
-          <textarea
-            id="productDescription"
-            name="productDescription"
-            rows="4"
-            placeholder="Lägg till produktbeskrivning"
-          ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Pris</label>
-          <div class="price-group">
-            <input
-              type="text"
-              id="forsaljningspris"
-              name="forsaljningspris"
-              placeholder="Försäljningspris i kr per st"
-            />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="productImage">Bild</label>
-          <input
-            type="text"
-            id="productImage"
-            name="productImage"
-            placeholder="Lägg till produktens bildadress"
-          />
-        </div>
-
+        <div class="form-group"> <label for="productImage">Bild</label> <input type="text" id="productImage" name="productImage" placeholder="Lägg till produktens bildadress" /> </div>
         <div class="button-group">
           <button type="submit" class="btn btn-primary">Lägg till produkt</button>
           <button type="button" class="btn btn-cancel">Avbryt</button>
@@ -145,72 +62,44 @@
 
     <div class="content-section" id="product-list">
       <h3>Produktlista</h3>
-      
       <table class="product-table"> 
-        <thead>
-          <tr>
-            <th>Kategori</th>
-            <th>Titel</th>
-            <th>Producent</th>
-            <th>Vikt</th>
-            <th>Beskrivning</th>
-            <th>kr/st</th>
-            <th>Åtgärder</th> 
-          </tr>
-        </thead>
-        <tbody id="productListBody">
-          </tbody>
+        <thead> <tr> <th>Kategori</th> <th>Titel</th> <th>Producent</th> <th>Vikt</th> <th>Beskrivning</th> <th>kr/st</th> <th>Lager</th> <th>Åtgärder</th> </tr> </thead>
+        <tbody id="productListBody"></tbody>
       </table>
-    
       <p id="productListError" class="error-message" style="color: red; display: none;"></p> 
+    </div>
+
+    <div class="content-section" id="category-list">
+      <h3>Kategorilista</h3>
+      <table class="category-table">
+        <thead> <tr> <th>Namn</th> <th>Beskrivning</th> <th>Åtgärder</th> </tr> </thead>
+        <tbody id="categoryListBody"></tbody>
+      </table>
+      <p id="categoryListError" class="error-message" style="color: red; display: none;"></p> 
+    </div>
+
+    <div class="content-section" id="customer-list">
+      <h3>Kundlista</h3>
+      <table class="customer-table">
+        <thead> <tr> <th>Förnamn</th> <th>Efternamn</th> <th>E-post</th> <th>Admin?</th> <th>Registrerad</th> <th>Åtgärder</th> </tr> </thead>
+        <tbody id="customerListBody"></tbody>
+      </table>
+      <p id="customerListError" class="error-message" style="color: red; display: none;"></p> 
+    </div>
+
+    <div class="content-section" id="category-add"> <h3>Lägg till kategori</h3> <p>Funktion ej implementerad än.</p> </div>
+    <div class="content-section" id="customer-add"> <h3>Lägg till kund</h3> <p>Funktion ej implementerad än.</p> </div>
+    <div class="content-section" id="order-add"> <h3>Lägg till beställning</h3> <p>Funktion ej implementerad än.</p> </div>
+    <div class="content-section" id="order-list"> <h3>Orderhistorik</h3> <p>Funktion ej implementerad än.</p> </div> 
     
-    </div>
-
-<!-- KATEGORIER -->
-    <div class="content-section" id="category-add">
-      <h3>Lägg till kategori</h3>
-      <p>Här kan du lägga till nya kategorier.</p>
-      <!-- HÄR SKA DET FETCHAS OCH KUNNA PUSHAS KATEGORIER-->
-    </div>
-
-<!-- KUNDER -->
-    <div class="content-section" id="customers">
-      <h3>Kunder</h3>
-      <p>Hantera dina kunder här.</p>
-      <!-- HÄR SKA DET FETCHAS OCH KUNNA PUSHAS KUNDER-->
-    </div>
-    
-<!-- Beställningar -->
-    <div class="content-section" id="order-history">
-      <h3>Beställningar</h3>
-      <p>Se beställningar.</p>
-<!-- HÄR SKA DET FETCHAS OCH KUNNA PUSHAS BESTÄLLNINGAR-->
-    </div>
-  </div>
-
-  <nav class="mobile-nav">
+  </div><nav class="mobile-nav">
     <ul>
-      <li>
-        <a href="#" data-section="product-list"> 
-          <span>Produkter</span> 
-        </a>
-      </li>
-      <li>
-        <a href="#" data-section="category-list">
-          <span>Kategorier</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" data-section="customer-list"> 
-          <span>Kunder</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" data-section="order-list">
-          <span>Order</span>
-        </a>
-      </li>
-      </ul>
+      <li> <a href="#" data-section="product-list"> <span>Produkter</span> </a> </li>
+      <li> <a href="#" data-section="category-list"> <span>Kategorier</span> </a> </li>
+      <li> <a href="#" data-section="customer-list"> <span>Kunder</span> </a> </li>
+      <li> <a href="#" data-section="order-list"> <span>Order</span> </a> </li>
+    </ul>
   </nav>
+
 </body>
 </html>
