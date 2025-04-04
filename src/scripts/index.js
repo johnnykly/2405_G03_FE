@@ -48,20 +48,6 @@ async function loadCategories() {
         element.innerHTML = `<button id="${category.name}">${category.name}</button>`;
         categoriesContainer.appendChild(element);
       });
-      categories.forEach((category) => {
-        //const categoriesList = createCategoriesList(category);
-        const element = document.createElement("div");
-        element.className = category.name;
-        element.innerHTML = `<button id="${category.name}">${category.name}</button>`;
-        categoriesContainer.appendChild(element);
-      });
-      categories.forEach((category) => {
-        //const categoriesList = createCategoriesList(category);
-        const element = document.createElement("div");
-        element.className = category.name;
-        element.innerHTML = `<button id="${category.name}">${category.name}</button>`;
-        categoriesContainer.appendChild(element);
-      });
     } else {
       categoriesContainer.innerHTML = "<p>No categories available.</p>";
     }
@@ -242,6 +228,31 @@ function mySidebarToggle() {
 }
 
 document.querySelector("#cart-header").addEventListener("click", () => {
+  document.querySelector(".cart-content").style.display = "block";
+  let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+  const cartContainer = document.querySelector(".cart-list");
+
+  cartContainer.innerHTML = "";
+  const element = document.createElement("h1");
+  element.innerHTML = `Varukorg`;
+  cartContainer.appendChild(element);
+
+  if (!shoppingCart) {
+    const cartContainer2 = document.querySelector(".cart-list");
+    const element2 = document.createElement("div");
+    element2.innerHTML = `Varukorgen är tom`;
+    cartContainer2.appendChild(element2);
+  } else {
+    shoppingCart.forEach((product) => {
+      const element = document.createElement("div");
+      element.className = product.title;
+      element.innerHTML = `<div>${product.title}</div>`;
+      cartContainer.appendChild(element);
+    });
+  }
+});
+
+document.querySelector("#cart-mobilemenu").addEventListener("click", () => {
   document.querySelector(".cart-content").style.display = "block";
   let shoppingCart = JSON.parse(localStorage.getItem("Products"));
   const cartContainer = document.querySelector(".cart-list");
