@@ -1,5 +1,3 @@
-// /src/utils/api.js (Includes Add, Delete, FetchById, Update for Products)
-
 export function getBaseUrl() {
   if (!window.location.href.includes('localhost')) {
     return "https://grupp-3.vercel.app/" 
@@ -51,10 +49,8 @@ export async function fetchOrders(endpoint = "api/orders") {
   } catch (error) { console.error('Network error fetching orders:', error); return []; }
 }
 
-// --- Product CUD Functions ---
 
 export async function addProduct(productData) {
-  // Function definition as provided before (POST /api/products)
   const url = `${getBaseUrl()}api/products`; console.log(`Attempting to POST product to: ${url}`);
   try {
     const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' /* + Auth */ }, body: JSON.stringify(productData) });
@@ -64,7 +60,6 @@ export async function addProduct(productData) {
 }
 
 export async function deleteProduct(productId) {
-  // Function definition as provided before (DELETE /api/products/:id)
   const url = `${getBaseUrl()}api/products/${productId}`; console.log(`Attempting to DELETE product from: ${url}`);
   if (!productId) { console.error("Delete failed: No product ID."); return { success: false, error: { message: "Product ID saknas" } }; }
   try {
@@ -75,44 +70,43 @@ export async function deleteProduct(productId) {
 }
 
 export async function fetchProductById(productId) {
-  // NEW: Fetches a single product
   const url = `${getBaseUrl()}api/products/${productId}`;
   console.log(`Workspaceing product by ID from: ${url}`);
-  if (!productId) { console.error("Fetch failed: No product ID."); return null; } // Return null or throw error
+  if (!productId) { console.error("Fetch failed: No product ID."); return null; }
   try {
-      const response = await fetch(url); // No headers needed for GET unless protected
+      const response = await fetch(url); 
       if (response.ok) {
           const data = await response.json();
           return data;
       } else {
           console.error(`Error fetching product ${productId}: ${response.status} ${response.statusText}`);
-          return null; // Indicate failure
+          return null;
       }
   } catch (error) {
       console.error(`Network error fetching product ${productId}:`, error);
-      return null; // Indicate failure
+      return null;
   }
 }
 
 export async function updateProduct(productId, productData) {
-  // NEW: Updates a product
-  const url = `${getBaseUrl()}api/products/${productId}`; // PUT endpoint
+
+  const url = `${getBaseUrl()}api/products/${productId}`; 
   console.log(`Attempting to PUT product update to: ${url}`);
   if (!productId) { console.error("Update failed: No product ID."); return { success: false, error: { message: "Product ID saknas" } }; }
 
   try {
     const response = await fetch(url, {
-      method: 'PUT', // Or 'PATCH' depending on backend API design
+      method: 'PUT', // 'PATCH'?
       headers: {
         'Content-Type': 'application/json',
-        // IMPORTANT: Add Authorization header when auth is implemented
+        // IMPORTANT: Add Authorization header
         // 'Authorization': `Bearer ${your_auth_token}` 
       },
       body: JSON.stringify(productData) 
     });
 
     if (response.ok) {
-      const result = await response.json(); // Assume PUT returns updated product
+      const result = await response.json();
       console.log("Product updated successfully via API:", result);
       return { success: true, data: result };
     } else {
