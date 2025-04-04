@@ -21,11 +21,11 @@ document.querySelectorAll("#categorylist").forEach((btn) => {
     //selectedCategory = e.target.innerHTML;
     console.log(selectedCategory);
     //selectedCategory = "alla";
-    filterProducts(selectedCategory);
+    filterProductsByCategory(selectedCategory);
   });
 });
 
-filterProducts(selectedCategory);
+filterProductsByCategory(selectedCategory);
 
 // Function to fetch and render products
 async function loadCategories() {
@@ -59,7 +59,7 @@ async function loadCategories() {
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 
-async function filterProducts(category) {
+async function filterProductsByCategory(category) {
   const products = await fetchProducts();
   //console.log(products);
   //console.log(category);
@@ -69,11 +69,32 @@ async function filterProducts(category) {
     console.log(filterdProducts);
     //return filterdProducts;
   } else {
-    let filterdProducts = products.filter((prod) => prod.category === category);
+    let filterdProducts = products.filter((prod) => prod.category == category);
     loadProducts(filterdProducts);
     console.log(filterdProducts);
     //return filterdProducts;
   }
+}
+
+async function filterProductsBySearch(searchInput) {
+  const products = await fetchProducts();
+  //let category = "Alla kategorier";
+  //console.log(products);
+  if (searchInput === "") {
+    let filterdProducts = products.filter((prod) => prod.title);
+
+    loadProducts(filterdProducts);
+    console.log(filterdProducts);
+    //return filterdProducts;
+  } else {
+    let filterdProducts = products.filter((prod) => prod.title == searchInput);
+
+    loadProducts(filterdProducts);
+    console.log(filterdProducts);
+    //return filterdProducts;
+  }
+
+  //return filterdProducts;
 }
 
 // Function to fetch and render products
@@ -118,9 +139,17 @@ function createProductCard(product) {
 
   if (shoppingCart !== null && cartValue > 0) {
     element.innerHTML = `
+    <div class="product-card-background"></div>
+    <div class="product-card-info">
     <img src="${product.image}" alt="${product.title}"
       onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
     <h3>${product.title}</h3>
+    <div class="product-card-extra-info">
+      <P>${product.description}</p>
+      <P>${product.weight}</p>
+      <P>${product.producer}</p>
+      <P>${product.category}</p>
+    </div>
     <p>${product.price.toFixed(2)} kr</p>
     <div class="cart-button-array">
       <div id="cartbuttonminus" class="cart-button-minus">-</div>
@@ -128,14 +157,24 @@ function createProductCard(product) {
       <div id="cartbuttonplus" class="cart-button-plus">+</div>
     </div>
     <div id="cardbutton" class="card-button"><button class="add-to-cart-btn">Köp</button></div>
+    </div>
   `;
     element.querySelector(".cart-button-array").style.display = "flex";
     element.querySelector("#cardbutton").style.display = "none";
+    element.querySelector(".product-card-extra-info").style.display = "none";
   } else {
     element.innerHTML = `
+    <div class="product-card-background"></div>
+    <div class="product-card-info">
     <img src="${product.image}" alt="${product.title}"
       onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
     <h3>${product.title}</h3>
+    <div class="product-card-extra-info">
+      <P>${product.description}</p>
+      <P>${product.weight}</p>
+      <P>${product.producer}</p>
+      <P>${product.category}</p>
+    </div>
     <p>${product.price.toFixed(2)} kr</p>
     <div class="cart-button-array">
       <div id="cartbuttonminus" class="cart-button-minus">-</div>
@@ -143,7 +182,9 @@ function createProductCard(product) {
       <div id="cartbuttonplus" class="cart-button-plus">+</div>
     </div>
     <div id="cardbutton" class="card-button"><button class="add-to-cart-btn">Köp</button></div>
+    </div>
   `;
+    element.querySelector(".product-card-extra-info").style.display = "none";
   }
 
   element.querySelector(".cart-button-plus").addEventListener("click", () => {
@@ -279,4 +320,13 @@ document.querySelector("#cart-mobilemenu").addEventListener("click", () => {
 
 document.querySelector(".cart-background").addEventListener("click", () => {
   document.querySelector(".cart-content").style.display = "none";
+});
+
+let input = document.getElementById("site-header-search");
+input.addEventListener("keypress", (e) => {
+  let input = document.getElementById("site-header-search").value;
+  filterProductsBySearch(input);
+  if (e.key === "Enter") {
+    e.preventDefault();
+  }
 });
