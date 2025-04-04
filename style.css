@@ -36,6 +36,7 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
   height: 4rem;
+  z-index: 10;
 }
 
 .site-header nav {
@@ -80,12 +81,11 @@ body {
 /* Sidebar */
 aside {
   grid-area: sidebar;
-  position: fixed;
+  position: absolute;
   align-self: start;
   display: none;
   width: 300px;
   top: 0;
-  height: calc(100vh);
   z-index: 20;
   background-color: #333;
   opacity: 0.99;
@@ -109,16 +109,26 @@ aside {
     button:active {
       transform: translateY(4px);
     }
+
+    @media (min-width: 800px) {
+
+    button {
+      background-color: white;
+      color: black;
+    }
+    }
   }
 
   @media (min-width: 800px) {
     display: grid;
     justify-items: center;
-    position: sticky;
+    position: relative;
     align-self: start;
-    top: 4rem;
-    height: calc(100vh - 4rem);
+    top: 1.3rem;
+    height: auto;
     z-index: 2;
+    background-color: white;
+    color: black;
   }
 }
 
@@ -130,6 +140,7 @@ aside {
 /* Main Content */
 .main-content {
   grid-area: main-content;
+  align-self: start;
   padding: 2rem;
   width: 80%;
   margin: auto;
@@ -155,6 +166,7 @@ aside {
   margin-right: 1rem;
 
   .mobile-menu-list {
+    display: flex;
     justify-self: center;
 
     a {
@@ -195,11 +207,45 @@ aside {
   margin-bottom: 0.5rem;
 }
 
+.product-card h3 {
+  height: 4rem;
+}
+
 .product-card button {
   background: lightgray;
   border: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
+}
+
+.product-card .cart-button-array {
+  display: none;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.product-card .cart-button-array .cart-button-plus {
+  width: 1.2rem;
+  border-radius: 500px;
+  color: white;
+  background-color: #001e62;
+  cursor: pointer;
+}
+
+.product-card .cart-button-array .cart-button-plus:active {
+  transform: translateY(-5px);
+}
+
+.product-card .cart-button-array .cart-button-minus {
+  width: 1.2rem;
+  border-radius: 500px;
+  color: white;
+  background-color: #001e62;
+  cursor: pointer;
+}
+
+.product-card .cart-button-array .cart-button-minus:active {
+  transform: translateY(-5px);
 }
 
 /* Login */

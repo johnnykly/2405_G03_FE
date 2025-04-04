@@ -1,7 +1,16 @@
 import { fetchProducts, fetchCategories } from "../utils/api.js";
 
 //document.addEventListener("DOMContentLoaded", loadCategories);
+
 let selectedCategory = "Alla kategorier";
+
+let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+if (shoppingCart !== null) {
+  let cartMobilemenu = document.getElementById("cart-mobilemenu");
+  cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+  let cartHeader = document.getElementById("cart-header");
+  cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+}
 
 loadCategories();
 
@@ -35,14 +44,22 @@ async function loadCategories() {
       categories.forEach((category) => {
         //const categoriesList = createCategoriesList(category);
         const element = document.createElement("div");
-        element.className = category.name
-          .replace("Hem & Hushåll", "Hem & hushåll")
-          .replace("Snacks & Godis", "Snacks och godis");
-        element.innerHTML = `<button id="${category.name
-          .replace("Hem & Hushåll", "Hem & hushåll")
-          .replace("Snacks & Godis", "Snacks och godis")}">${category.name
-          .replace("Hem & Hushåll", "Hem & hushåll")
-          .replace("Snacks & Godis", "Snacks och godis")}</button>`;
+        element.className = category.name;
+        element.innerHTML = `<button id="${category.name}">${category.name}</button>`;
+        categoriesContainer.appendChild(element);
+      });
+      categories.forEach((category) => {
+        //const categoriesList = createCategoriesList(category);
+        const element = document.createElement("div");
+        element.className = category.name;
+        element.innerHTML = `<button id="${category.name}">${category.name}</button>`;
+        categoriesContainer.appendChild(element);
+      });
+      categories.forEach((category) => {
+        //const categoriesList = createCategoriesList(category);
+        const element = document.createElement("div");
+        element.className = category.name;
+        element.innerHTML = `<button id="${category.name}">${category.name}</button>`;
         categoriesContainer.appendChild(element);
       });
     } else {
@@ -95,18 +112,12 @@ async function loadProducts(filterdProducts) {
     console.error("Error fetching products:", error);
     productsContainer.innerHTML = "<p>Failed to load products.</p>";
   }
-
-  let shoppingCart = JSON.parse(localStorage.getItem("Products"));
-  console.log(shoppingCart.length);
-  let cartHeader = document.getElementById("cart-header");
-  let cartMobilemenu = document.getElementById("cart-mobilemenu");
-  cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
-  cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
 }
 
 // Function to create an individual product card
 function createProductCard(product) {
   const element = document.createElement("div");
+  let cartValue = 0;
   element.className = "product-card";
 
   element.innerHTML = `
@@ -114,10 +125,57 @@ function createProductCard(product) {
       onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
     <h3>${product.title}</h3>
     <p>${product.price.toFixed(2)} kr</p>
-    <button class="add-to-cart-btn">Add to Cart</button>
+    <div class="cart-button-array">
+      <div id="cartbuttonminus" class="cart-button-minus">-</div>
+      <div id="cartbuttoncount" class="cart-button-count"></div>
+      <div id="cartbuttonplus" class="cart-button-plus">+</div>
+    </div>
+    <div id="cardbutton" class="card-button"><button class="add-to-cart-btn">Köp</button></div>
   `;
 
+  element.querySelector(".cart-button-plus").addEventListener("click", () => {
+    cartValue++;
+    let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+    shoppingCart.push(product);
+    localStorage.setItem("Products", JSON.stringify(shoppingCart));
+    shoppingCart = JSON.parse(localStorage.getItem("Products"));
+    let cartCardView = element.querySelector("#cartbuttoncount");
+    cartCardView.innerHTML = `Varukorg (${cartValue})`;
+    let cartHeader = document.getElementById("cart-header");
+    cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+    let cartMobilemenu = document.getElementById("cart-mobilemenu");
+    cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+  });
+
+  element.querySelector(".cart-button-minus").addEventListener("click", () => {
+    cartValue--;
+    let shoppingCart = JSON.parse(localStorage.getItem("Products"));
+
+    let index = 0;
+    for (let i = 0; i < shoppingCart.length; i++) {
+      if (shoppingCart[i].title === product.title) {
+        index = i;
+      }
+    }
+    shoppingCart.splice(index, 1);
+    localStorage.setItem("Products", JSON.stringify(shoppingCart));
+    shoppingCart = JSON.parse(localStorage.getItem("Products"));
+    let cartCardView = element.querySelector("#cartbuttoncount");
+    cartCardView.innerHTML = `Varukorg (${cartValue})`;
+    let cartHeader = document.getElementById("cart-header");
+    cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+    let cartMobilemenu = document.getElementById("cart-mobilemenu");
+    cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+
+    if (cartValue === 0) {
+      element.querySelector(".cart-button-array").style.display = "none";
+      element.querySelector("#cardbutton").style.display = "block";
+    }
+  });
+
   element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
+    element.querySelector(".cart-button-array").style.display = "flex";
+    element.querySelector("#cardbutton").style.display = "none";
     let shoppingCart = JSON.parse(localStorage.getItem("Products"));
     if (shoppingCart !== null) {
       console.log(shoppingCart);
@@ -132,11 +190,12 @@ function createProductCard(product) {
     shoppingCart = JSON.parse(localStorage.getItem("Products"));
     console.log(shoppingCart.length);
     let cartHeader = document.getElementById("cart-header");
-    let cartMobilemenu = document.getElementById("cart-mobilemenu");
     cartHeader.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
+    let cartMobilemenu = document.getElementById("cart-mobilemenu");
     cartMobilemenu.innerHTML = `Varukorg ( ${shoppingCart.length} )`;
-
-    alert(`${product.title} har lagts till varukorgen`);
+    cartValue++;
+    let cartCardView = element.querySelector("#cartbuttoncount");
+    cartCardView.innerHTML = `Varukorg (${cartValue})`;
   });
 
   return element;
