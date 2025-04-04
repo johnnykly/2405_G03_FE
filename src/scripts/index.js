@@ -118,9 +118,17 @@ function createProductCard(product) {
 
   if (shoppingCart !== null && cartValue > 0) {
     element.innerHTML = `
+    <div class="product-card-background"></div>
+    <div class="product-card-info">
     <img src="${product.image}" alt="${product.title}"
       onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
     <h3>${product.title}</h3>
+    <div class="product-card-extra-info">
+      <P>${product.description}</p>
+      <P>${product.weight}</p>
+      <P>${product.producer}</p>
+      <P>${product.category}</p>
+    </div>
     <p>${product.price.toFixed(2)} kr</p>
     <div class="cart-button-array">
       <div id="cartbuttonminus" class="cart-button-minus">-</div>
@@ -128,14 +136,24 @@ function createProductCard(product) {
       <div id="cartbuttonplus" class="cart-button-plus">+</div>
     </div>
     <div id="cardbutton" class="card-button"><button class="add-to-cart-btn">Köp</button></div>
+    </div>
   `;
     element.querySelector(".cart-button-array").style.display = "flex";
     element.querySelector("#cardbutton").style.display = "none";
+    element.querySelector(".product-card-extra-info").style.display = "none";
   } else {
     element.innerHTML = `
+    <div class="product-card-background"></div>
+    <div class="product-card-info">
     <img src="${product.image}" alt="${product.title}"
       onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
     <h3>${product.title}</h3>
+    <div class="product-card-extra-info">
+      <P>${product.description}</p>
+      <P>${product.weight}</p>
+      <P>${product.producer}</p>
+      <P>${product.category}</p>
+    </div>
     <p>${product.price.toFixed(2)} kr</p>
     <div class="cart-button-array">
       <div id="cartbuttonminus" class="cart-button-minus">-</div>
@@ -143,7 +161,9 @@ function createProductCard(product) {
       <div id="cartbuttonplus" class="cart-button-plus">+</div>
     </div>
     <div id="cardbutton" class="card-button"><button class="add-to-cart-btn">Köp</button></div>
+    </div>
   `;
+    element.querySelector(".product-card-extra-info").style.display = "none";
   }
 
   element.querySelector(".cart-button-plus").addEventListener("click", () => {
