@@ -145,7 +145,6 @@ function createProductCard(product) {
   `;
     element.querySelector(".cart-button-array").style.display = "flex";
     element.querySelector("#cardbutton").style.display = "none";
-    cartValue = 0;
   } else {
     element.innerHTML = `
     <img src="${product.image}" alt="${product.title}"
