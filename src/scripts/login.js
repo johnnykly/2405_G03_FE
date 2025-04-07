@@ -34,7 +34,6 @@ document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
     const res = await fetch("https://grupp-3.vercel.app/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify({ email, password })
     });
 
