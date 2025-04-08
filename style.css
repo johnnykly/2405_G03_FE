@@ -169,6 +169,26 @@ aside {
       z-index: 6;
       color: black;
       background-color: white;
+
+      h1 {
+        justify-self: center;
+      }
+
+      a:link, a:visited {
+        background-color: #001e62;
+        color: white;
+        align-content: center;
+        margin-top: 1rem;
+        padding: 14px 25px;
+        text-decoration: none;
+        display: grid;
+        justify-self: center;
+        border-radius: 1rem;
+      }
+      
+      a:hover, a:active {
+        background-color: red;
+      }
     }
 
     @media (min-width: 800px) {
