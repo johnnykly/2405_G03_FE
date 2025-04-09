@@ -2,12 +2,14 @@ body {
   margin: 0;
   padding: 0;
   min-width: 320px;
+  width: 100%;
   display: grid;
   justify-content: center;
 
   .content {
     display: grid;
     justify-items: center;
+    margin: 1rem;
 
     .header-content {
       display: grid;
@@ -15,18 +17,19 @@ body {
 
     .shopping-cart-content {
       display: grid;
+      width: 100%;
 
       .shopping-cart-item {
         display: grid;
 
         .shopping-cart-item-info {
-          width: 600px;
+          max-width: 600px;
           display: flex;
           justify-content: space-between;
         }
 
         .shopping-cart-item-info-tot-price {
-          width: 600px;
+          max-width: 600px;
           display: flex;
           justify-content: space-between;
           margin-top: 1rem;
@@ -37,19 +40,20 @@ body {
     .form-content {
       margin-top: 2rem;
       display: grid;
-      width: 600px;
+      max-width: 600px;
 
       form {
         input {
           margin: 0;
           padding: 0;
-          width: 598px;
+          max-width: 596px;
           margin-bottom: 1rem;
+          width: calc(100vw - 2rem);
         }
 
         #submit {
           margin-top: 1rem;
-          width: 602px;
+          max-width: 603px;
         }
       }
     }
