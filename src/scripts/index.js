@@ -87,10 +87,16 @@ async function filterProductsBySearch(searchInput) {
     console.log(filterdProducts);
     //return filterdProducts;
   } else {
-    let filterdProducts = products.filter((prod) => prod.title == searchInput);
-
-    loadProducts(filterdProducts);
-    console.log(filterdProducts);
+    let filteredProducts = products.filter((prod) =>
+      prod.title.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    
+  
+    filteredProducts.sort((a, b) => a.title.localeCompare(b.title));
+    
+    loadProducts(filteredProducts);
+    console.log(filteredProducts);
+    
     //return filterdProducts;
   }
 
@@ -373,10 +379,15 @@ document
   });
 
 let input = document.getElementById("site-header-search");
-input.addEventListener("keypress", (e) => {
-  let input = document.getElementById("site-header-search").value;
-  filterProductsBySearch(input);
-  if (e.key === "Enter") {
-    e.preventDefault();
-  }
+// input.addEventListener("keypress", (e) => {
+//   let input = document.getElementById("site-header-search").value;
+//   filterProductsBySearch(input);
+//   if (e.key === "Enter") {
+//     e.preventDefault();
+//   }
+// });
+
+input.addEventListener("input", () => {
+  const inputValue = document.getElementById("site-header-search").value;
+  filterProductsBySearch(inputValue);
 });
