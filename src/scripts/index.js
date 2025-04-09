@@ -142,7 +142,7 @@ function createProductCard(product) {
     <div class="product-card-background"></div>
     <div class="product-card-info">
     <img src="${product.image}" alt="${product.title}"
-      onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
+      onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" class="product-card-img" />
     <h3>${product.title}</h3>
     <div class="product-card-extra-info">
       <P>${product.description}</p>
@@ -167,7 +167,7 @@ function createProductCard(product) {
     <div class="product-card-background"></div>
     <div class="product-card-info">
     <img src="${product.image}" alt="${product.title}"
-      onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" />
+      onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" class="product-card-img" />
     <h3>${product.title}</h3>
     <div class="product-card-extra-info">
       <P>${product.description}</p>
@@ -186,6 +186,34 @@ function createProductCard(product) {
   `;
     element.querySelector(".product-card-extra-info").style.display = "none";
   }
+
+  element.querySelector(".product-card-img").addEventListener("click", () => {
+    //element.querySelector(".product-card-extra-info").style.display = "block";
+
+    const mainProductCardContainer = document.querySelector(
+      "#productCardBackground"
+    );
+
+    const mainProductCardItem = document.createElement("div");
+    mainProductCardItem.className = "main-product-card-item";
+    mainProductCardItem.innerHTML = `
+      <div class="product-card-info">
+        <img src="${product.image}" alt="${product.title}"
+          onerror="this.onerror=null; this.src='./src/images/products/placeholder.jpg';" class="product-card-img" />
+        <h3>${product.title}</h3>
+        <div class="product-card-extra-info-view">
+          <P>${product.description}</p>
+          <P>${product.weight}</p>
+          <P>${product.producer}</p>
+          <P>${product.category}</p>
+        </div>
+        <p>${product.price.toFixed(2)} kr</p>
+      </div>
+    `;
+    document.querySelector(".main-product-card-content").style.display =
+      "block";
+    mainProductCardContainer.appendChild(mainProductCardItem);
+  });
 
   element.querySelector(".cart-button-plus").addEventListener("click", () => {
     cartValue++;
@@ -333,6 +361,16 @@ document.querySelector("#cart-mobilemenu").addEventListener("click", () => {
 document.querySelector(".cart-background").addEventListener("click", () => {
   document.querySelector(".cart-content").style.display = "none";
 });
+
+document
+  .querySelector(".product-card-background")
+  .addEventListener("click", () => {
+    const mainProductCardContainer = document.querySelector(
+      ".main-product-card-item"
+    );
+    mainProductCardContainer.remove();
+    document.querySelector(".main-product-card-content").style.display = "none";
+  });
 
 let input = document.getElementById("site-header-search");
 input.addEventListener("keypress", (e) => {
