@@ -44,9 +44,8 @@ body {
 
       form {
         input {
-          margin: 0;
-          padding: 0;
           max-width: 596px;
+          padding-top: 0.3rem;
           margin-bottom: 1rem;
           width: calc(100vw - 2rem);
         }
