@@ -8,78 +8,59 @@
   <link rel="stylesheet" href="./header.css" />
   <link rel="stylesheet" href="./footer.css" />
   <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./login.css" />
+  <link rel="stylesheet" href="./css/login.css" />
+ 
 </head>
 <body>
-  <!-- HEADER -->
   <header class="site-header">
     <nav>
       <a href="index.html" class="logo">Hakim Livs</a>
       <ul class="nav-links">
         <li><a href="index.html">Produkter</a></li>
         <li><a href="cart.html">Kundvagn</a></li>
-        <!-- <li><a href="#" id="openLoginModal">Logga in</a></li> -->
-        <li class="nav-li-login">
-          <a href="login.html">Logga in</a>
-        </li>
-        
+        <li><a href="login.html">Logga in</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- login modal -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeLoginModal">&times;</span>
-      <h2>Logga in</h2>
-      <form id="loginForm">
-        <label for="login-email">E-post</label>
-        <input type="email" id="login-email" placeholder="E-post" required />
+  <main>
+    <section id="loginSection">
+      <div class="modal">
+        <span class="close-btn" id="closeLoginModal">&times;</span>
+        <h2>Logga in</h2>
+        <form id="loginForm">
+          <label for="login-email">E-post</label>
+          <input type="email" id="login-email" required />
+          <label for="login-password">Lösenord</label>
+          <input type="password" id="login-password" required />
+          <button type="submit">Logga in</button>
+        </form>
+        <p class="switch-auth">
+          Inte medlem? <a href="#" id="openRegisterModal">Registrera dig här</a>
+        </p>
+      </div>
+    </section>
 
-        <label for="login-password">Lösenord</label>
-        <input type="password" id="login-password" placeholder="Lösenord" required />
+    <section id="registerSection" class="hidden">
+      <div class="modal">
+        <span class="close-btn" id="closeRegisterModal">&times;</span>
+        <h2>Registrera dig</h2>
+        <form id="registerForm">
+          <input type="text" id="reg-firstname" placeholder="Förnamn" required />
+          <input type="text" id="reg-lastname" placeholder="Efternamn" required />
+          <input type="email" id="reg-email" placeholder="E-post" required />
+          <input type="email" id="reg-email-confirm" placeholder="Bekräfta e-post" required />
+          <input type="password" id="reg-password" placeholder="Lösenord" required />
+          <input type="password" id="reg-password2" placeholder="Bekräfta lösenord" required />
+          <button type="submit">Registrera</button>
+        </form>
+        <p class="switch-auth">
+          Redan medlem? <a href="#" id="showLogin">Logga in här</a>
+        </p>
+      </div>
+    </section>
+  </main>
 
-        <button type="submit">Logga in</button>
-      </form>
-      <p class="switch-auth">
-        Inte medlem? <a href="#" id="openRegisterModal">Registrera dig här</a>
-      </p>
-    </div>
-  </div>
-
-  <!-- register modal -->
-  <div id="registerModal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close-btn" id="closeRegisterModal">&times;</span>
-      <h2>Registrera dig</h2>
-      <form id="registerForm">
-        <label for="reg-firstname">Förnamn</label>
-        <input type="text" id="reg-firstname" placeholder="Förnamn" required />
-
-        <label for="reg-lastname">Efternamn</label>
-        <input type="text" id="reg-lastname" placeholder="Efternamn" required />
-
-        <label for="reg-email">E-post</label>
-        <input type="email" id="reg-email" placeholder="E-post" required />
-
-        <label for="reg-email-confirm">Bekräfta e-post</label>
-        <input type="email" id="reg-email-confirm" placeholder="Bekräfta e-post" required />
-
-        <label for="reg-password">Lösenord</label>
-        <input type="password" id="reg-password" placeholder="Lösenord" required />
-
-        <label for="reg-password2">Bekräfta lösenord</label>
-        <input type="password" id="reg-password2" placeholder="Bekräfta lösenord" required />
-
-        <button type="submit">Registrera</button>
-      </form>
-      <p class="switch-auth">
-        Redan medlem? <a href="#" id="showLogin">Logga in här</a>
-      </p>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-content">
       <p>&copy; 2024 Hakim Livs. All rights reserved.</p>
