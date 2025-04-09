@@ -4,7 +4,6 @@ import {
 } from '../utils/api.js';
 
 document.addEventListener("DOMContentLoaded", () => {
-      // --- Authentication Check ---
       const token = sessionStorage.getItem('token');
       const userString = sessionStorage.getItem('user');
       let user = null;
@@ -12,21 +11,16 @@ document.addEventListener("DOMContentLoaded", () => {
           try { user = JSON.parse(userString); } catch(e) { console.error("Error parsing user data from sessionStorage", e); }
       }
   
-      // Redirect to login if no token OR if user data exists but isAdmin is not true
       if (!token || !(user?.role === 'admin')) { 
-        // The rest of the redirect logic inside the if block stays the same
         console.log("No valid admin session found (token missing or user not admin role), redirecting...");
-        window.location.href = '/index.html'; // Or your login page path
+        window.location.href = '/index.html'; 
         return; 
     }
       console.log("Admin authenticated. Token:", token ? 'Exists' : 'Missing', "User:", user);
-      // --- End Authentication Check ---
-  
-      // --- State Variables --- 
       let isEditMode = false; 
-      // ... rest of your existing code inside DOMContentLoaded ...
+
   
-  }); // --- End of DOMContentLoaded Listener ---
+  });
   let isEditMode = false;         
   let editingProductId = null;    
 
