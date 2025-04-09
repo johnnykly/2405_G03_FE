@@ -13,13 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   
       // Redirect to login if no token OR if user data exists but isAdmin is not true
-      if (!token || !user?.isAdmin) { 
-          console.log("No valid admin session found, redirecting to login.");
-          // Assuming your login page is at the root level, e.g., index.html or login.html
-          // Adjust the path '/index.html' or '/login.html' if necessary
-          window.location.href = '/index.html'; // Or your specific login page path
-          return; // Stop executing rest of admin.js if not authenticated
-      }
+      if (!token || !(user?.role === 'admin')) { 
+        // The rest of the redirect logic inside the if block stays the same
+        console.log("No valid admin session found (token missing or user not admin role), redirecting...");
+        window.location.href = '/index.html'; // Or your login page path
+        return; 
+    }
       console.log("Admin authenticated. Token:", token ? 'Exists' : 'Missing', "User:", user);
       // --- End Authentication Check ---
   
