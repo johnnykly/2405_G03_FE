@@ -82,6 +82,25 @@ if (shoppingCart) {
       totalPrice: totOrderPrice,
     };
     console.log(userData);
+    const apiUrl = "https://grupp-3.vercel.app/api/orders";
+
+    axios
+      .post(apiUrl, userData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("jwt")}`, // Add the JWT token in the Authorization header.
+        },
+      })
+      .then((response) => {
+        console.log("Response:", response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "Error:",
+          error.response ? error.response.data : error.message
+        );
+      });
+
     formElem.reset();
   });
 }
