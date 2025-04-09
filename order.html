@@ -4,8 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hakim Livs</title>
-    <link rel="stylesheet" href="order.css" />
+    <link rel="stylesheet" href="/order.css" />
     <script type="module" src="./src/scripts/order.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <div id="content" class="content">
+      <div id="headerContent" class="header-content">
+        <h1>Order</h1>
+      </div>
+      <div id="shoppingCartContent" class="shopping-cart-content"></div>
+      <div id="formContent" class="form-content">
+        <form>
+          <label for="firstname">Namn:</label><br />
+          <input type="text" id="firstname" name="firstname" /><br />
+          <label for="lastname">Efternamn:</label><br />
+          <input type="text" id="lastname" name="lastname" /><br />
+          <label for="phonenumber">Telefonnummer:</label><br />
+          <input type="text" id="phonenumber" name="phonenumber" /><br />
+          <label for="email">Epost:</label><br />
+          <input type="text" id="email" name="email" /><br />
+          <input id="submit" type="submit" value="Lägg till order" />
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

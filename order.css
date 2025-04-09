@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  display: grid;
+  justify-content: center;
+
+  .content {
+    display: grid;
+    justify-items: center;
+
+    .header-content {
+      display: grid;
+    }
+
+    .shopping-cart-content {
+      display: grid;
+
+      .shopping-cart-item {
+        display: grid;
+
+        .shopping-cart-item-info {
+          width: 600px;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .shopping-cart-item-info-tot-price {
+          width: 600px;
+          display: flex;
+          justify-content: space-between;
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    .form-content {
+      margin-top: 2rem;
+      display: grid;
+      width: 600px;
+
+      form {
+        input {
+          margin: 0;
+          padding: 0;
+          width: 598px;
+          margin-bottom: 1rem;
+        }
+
+        #submit {
+          margin-top: 1rem;
+          width: 602px;
+        }
+      }
+    }
+  }
+}
