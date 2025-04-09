@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     registerSection.classList.add("hidden");
   });
 
+  // Log in 
   document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = document.getElementById("login-email").value;
@@ -35,16 +36,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch("https://grupp-3.vercel.app/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+   
+        console.log(" accessToken received:");
+
+        sessionStorage.setItem("token", data.accessToken);
+        sessionStorage.setItem("user", JSON.stringify(data.user));
+
         alert(`Välkommen ${data.user.firstName}`);
-        window.location.href = data.user.role === "admin" ? "admin.html" : "index.html";
+        window.location.href =
+          data.user.role === "admin" ? "admin.html" : "index.html";
       } else {
         alert(data.message || "Fel vid inloggning");
       }
@@ -53,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Registering
   document.getElementById("registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const firstName = document.getElementById("reg-firstname").value;
@@ -69,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch("https://grupp-3.vercel.app/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName, lastName, email, password })
+        body: JSON.stringify({ firstName, lastName, email, password }),
       });
 
       const data = await res.json();
