@@ -292,9 +292,11 @@ document.querySelector("#cart-header").addEventListener("click", () => {
     });
   }
 
-  const elementOrder = document.createElement("div");
-  elementOrder.innerHTML = `<a href="/order.html">Lägg till order</a>`;
-  cartContainer.appendChild(elementOrder);
+  if (shoppingCart.length > 0) {
+    const elementOrder = document.createElement("div");
+    elementOrder.innerHTML = `<a href="/order.html">Lägg till order</a>`;
+    cartContainer.appendChild(elementOrder);
+  }
 });
 
 document.querySelector("#cart-mobilemenu").addEventListener("click", () => {
@@ -321,9 +323,11 @@ document.querySelector("#cart-mobilemenu").addEventListener("click", () => {
     });
   }
 
-  const elementOrder = document.createElement("div");
-  elementOrder.innerHTML = `<a href="/order.html">Lägg till order</a>`;
-  cartContainer.appendChild(elementOrder);
+  if (shoppingCart.length > 0) {
+    const elementOrder = document.createElement("div");
+    elementOrder.innerHTML = `<a href="/order.html">Lägg till order</a>`;
+    cartContainer.appendChild(elementOrder);
+  }
 });
 
 document.querySelector(".cart-background").addEventListener("click", () => {
