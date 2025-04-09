@@ -292,7 +292,7 @@ document.querySelector("#cart-header").addEventListener("click", () => {
     });
   }
 
-  if (shoppingCart.length > 0) {
+  if (shoppingCart) {
     const elementOrder = document.createElement("div");
     elementOrder.innerHTML = `<a href="/order.html">Lägg till order</a>`;
     cartContainer.appendChild(elementOrder);
@@ -323,7 +323,7 @@ document.querySelector("#cart-mobilemenu").addEventListener("click", () => {
     });
   }
 
-  if (shoppingCart.length > 0) {
+  if (shoppingCart) {
     const elementOrder = document.createElement("div");
     elementOrder.innerHTML = `<a href="/order.html">Lägg till order</a>`;
     cartContainer.appendChild(elementOrder);
