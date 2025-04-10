@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
     registerSection.classList.add("hidden");
   });
 
-  // Log in 
+  // login 
   document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const email = document.getElementById("login-email").value;
-    const password = document.getElementById("login-password").value;
+    const email = document.getElementById("login-email").value.trim();
+    const password = document.getElementById("login-password").value.trim();
 
     try {
       const res = await fetch("https://grupp-3.vercel.app/api/auth/login", {
@@ -41,33 +41,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await res.json();
 
-      if (res.ok) {
-   
-        console.log(" accessToken received:");
-
+      if (res.ok && data.accessToken) {
         sessionStorage.setItem("token", data.accessToken);
         sessionStorage.setItem("user", JSON.stringify(data.user));
-
         alert(`Välkommen ${data.user.firstName}`);
-        window.location.href =
-          data.user.role === "admin" ? "admin.html" : "index.html";
+        window.location.href = data.user.role === "admin" ? "admin.html" : "index.html";
       } else {
-        alert(data.message || "Fel vid inloggning");
+        alert(data.message || "Fel vid inloggning. Saknar behörighet.");
       }
     } catch (err) {
       alert("Något gick fel vid inloggning");
     }
   });
 
-  // Registering
+  // registering
   document.getElementById("registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const firstName = document.getElementById("reg-firstname").value;
-    const lastName = document.getElementById("reg-lastname").value;
-    const email = document.getElementById("reg-email").value;
-    const confirmEmail = document.getElementById("reg-email-confirm").value;
-    const password = document.getElementById("reg-password").value;
-    const confirmPassword = document.getElementById("reg-password2").value;
+    const firstName = document.getElementById("reg-firstname").value.trim();
+    const lastName = document.getElementById("reg-lastname").value.trim();
+    const email = document.getElementById("reg-email").value.trim();
+    const confirmEmail = document.getElementById("reg-email-confirm").value.trim();
+    const password = document.getElementById("reg-password").value.trim();
+    const confirmPassword = document.getElementById("reg-password2").value.trim();
+
+    const nameRegex = /^[A-Za-zÅÄÖåäö]{2,}$/;
+
+    if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
+      return alert("Förnamn och efternamn får inte innehålla siffror");
+    }
 
     if (email !== confirmEmail) return alert("E-post matchar inte");
     if (password !== confirmPassword) return alert("Lösenord matchar inte");

@@ -1,111 +1,137 @@
 *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-  }
-  
-  main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; 
-    padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+
+.modal {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 3rem;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+input:focus {
+  border-color: #502ae7;
+  outline: none;
+}
+
+button {
+  background-color: #502ae7;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #350c82;
+}
+
+.switch-auth {
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.close-btn {
+  display: block;
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.close-btn:hover {
+  color: #e00;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #001e62;
+  color: white;
+  margin-top: auto;
+}
+
+/* tablet */
+@media (min-width: 768px) {
+  .modal {
+    max-width: 500px;
+    padding: 2.5rem;
   }
 
-  .modal {
-    width: 100%;
-    max-width: 400px;
-    background: white;
-    padding: 2rem 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 3rem; /* Gaps with header */
+  input, button {
+    font-size: 1.05rem;
   }
-  
+
   .close-btn {
-    display: block;
-    text-align: right;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-    margin-bottom: 1rem;
+    font-size: 1.6rem;
   }
-  
-  .close-btn:hover {
-    color: #e00;
+}
+
+/* desktop */
+@media (min-width: 1024px) {
+  .modal {
+    max-width: 550px;
+    padding: 3rem;
   }
-  
-  input,
-  button {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
+
+  input, button {
+    font-size: 1.1rem;
+    padding: 1rem;
   }
-  
-  button {
-    background-color: #502ae7;
-    color: white;
-    border: none;
-    cursor: pointer;
+
+  .close-btn {
+    font-size: 1.8rem;
   }
-  
-  button:hover {
-    background-color: #350c82;
-  }
-  
-  .switch-auth {
-    text-align: center;
-    font-size: 0.95rem;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  .site-footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    background-color: #001e62;
-    color: white;
-    margin-top: auto;
-  }
-  
-  @media (min-width: 768px) {
-    .modal {
-      max-width: 500px;
-      padding: 2.5rem;
-    }
-  
-    input, button {
-      font-size: 1.05rem;
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .modal {
-      max-width: 550px;
-      padding: 3rem;
-    }
-  
-    input, button {
-      font-size: 1.1rem;
-      padding: 1rem;
-    }
-  
-    .close-btn {
-      font-size: 1.8rem;
-    }
-  }
-  
+}
+
+/* Anpassning av rullningslisten (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f2f2f2;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #502ae7;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #350c82;
+}
