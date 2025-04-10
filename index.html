@@ -1,77 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hakim Livs</title>
-    <link rel="stylesheet" href="style.css" />
-    <script type="module" src="./src/scripts/index.js" defer></script>
-  </head>
-  <body>
-    <!-- HEADER -->
-    <header class="site-header">
-      <nav>
-        <a href="index.html" class="logo">Hakim Livs</a>
-    
-        <div class="search-container">
-          <input id="site-header-search" type="text" placeholder="Sök..." />
-          <span class="search-icon">🔍</span>
-        </div>
-    
-        <ul class="nav-links">
-          <li class="nav-li-products"><a href="products.html">Products</a></li>
-          <li class="nav-li-cart">
-            <div id="cart-header">Varukorg (0)</div>
-          </li>
-          <li class="nav-li-login"><a href="/login.html">Login</a></li>
-        </ul>
-      </nav>
-    </header>
-    
-    <!-- SIDEBAR -->
-    <aside id="sidebar">
-      <div class="sidebar-items">
-        Kategorier
-        <div id="categorylist"></div>
-      </div>
-    </aside>
-    <!-- MAIN CONTENT -->
-    <main id="main">
-      <div class="main-content">
-        <h1>Welcome to Hakim Livs</h1>
-        <div id="products"></div>
-        <div id="mobilemenu">
-          <div class="mobile-menu-list">
-            <button id="togglesidebar">Menu</button>
-            <div id="cart-mobilemenu">Varukorg (0)</div>
-          </div>
-        </div>
-      </div>
-      <div class="main-product-card-content">
-        <div id="productCardBackground" class="product-card-background">
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hakim Livs - Logga in</title>
+  <link rel="stylesheet" href="./global.css" />
+  <link rel="stylesheet" href="./header.css" />
+  <link rel="stylesheet" href="./footer.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./css/login.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <a href="index.html" class="logo">Hakim Livs</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Produkter</a></li>
+        <li><a href="cart.html">Kundvagn</a></li>
+        <li><a href="login.html">Logga in</a></li>
+      </ul>
+    </nav>
+  </header>
 
-        </div>
+  <main>
+    <section id="loginSection">
+      <div class="modal">
+        <span class="close-btn" id="closeLoginModal">&times;</span>
+        <h2>Logga in</h2>
+        <form id="loginForm">
+          <label for="login-email">E-post</label>
+          <input type="email" id="login-email" required />
+          <label for="login-password">Lösenord</label>
+          <input type="password" id="login-password" required autocomplete="current-password" />
+          <button type="submit">Logga in</button>
+        </form>
+        <p class="switch-auth">
+          Inte medlem? <a href="#" id="openRegisterModal">Registrera dig här</a>
+        </p>
       </div>
-      <div class="cart-content">
-        <div class="cart-background">
-          <div class="cart-list"></div>
-        </div>
-      </div>
-    </main>
+    </section>
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <p>&copy; 2024 Hakim Livs. All rights reserved.</p>
-        <div class="footer-links">
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
-          <a href="/terms">Terms</a>
-        </div>
+    <section id="registerSection" class="hidden">
+      <div class="modal">
+        <span class="close-btn" id="closeRegisterModal">&times;</span>
+        <h2>Registrera dig</h2>
+        <form id="registerForm">
+          <input type="text" id="reg-firstname" placeholder="Förnamn" required pattern="^[A-Za-zÅÄÖåäö]{2,}$" title="Endast bokstäver, minst 2 tecken" />
+          <input type="text" id="reg-lastname" placeholder="Efternamn" required pattern="^[A-Za-zÅÄÖåäö]{2,}$" title="Endast bokstäver, minst 2 tecken" />
+          <input type="email" id="reg-email" placeholder="E-post" required />
+          <input type="email" id="reg-email-confirm" placeholder="Bekräfta e-post" required />
+          <input type="password" id="reg-password" placeholder="Lösenord" required autocomplete="new-password" />
+          <input type="password" id="reg-password2" placeholder="Bekräfta lösenord" required autocomplete="new-password" />
+          <button type="submit">Registrera</button>
+        </form>
+        <p class="switch-auth">
+          Redan medlem? <a href="#" id="showLogin">Logga in här</a>
+        </p>
       </div>
-    </footer>
+    </section>
+  </main>
 
-    <!-- PAGE-SPECIFIC JAVASCRIPT -->
-    <script type="module" src="./src/scripts/index.js"></script>
-  </body>
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2024 Hakim Livs. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./src/scripts/login.js"></script>
+</body>
 </html>
