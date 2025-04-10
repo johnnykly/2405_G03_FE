@@ -96,7 +96,7 @@ if (shoppingCart) {
       .post(apiUrl, userData)
       .then((response) => {
         console.log("Response:", response.data);
-        alert(response.data);
+        alert("Ditt order är mottaget.");
       })
       .catch((error) => {
         console.error(
