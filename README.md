@@ -1,4 +1,30 @@
-# Projektets namn : Hakim Livs 
+- URL till alla GitHub-Repon (källkoden)
+- Info om hur man deployar koden.
+- En lista över alla endpoints (API) med exempel
+- Steg för steg info om hur man deployar hela siten till en ny server
+- Enkel vägledning för användning av siten
+- Eventuella gruppspesifika login såsom inlogg till atlas sålänge de inte är kopplade till privata mailadresser (frivilligt)
+- Postman export (frivilligt)
+- Enviroment variabler som används lokalt
+- Enviroment variabler som används i deployat läge
+- Information om hur man startar projektet lokalt
+ 
+
+Detta dokument måste finnas på er Confluence inför presentationen.
+ 
+
+Överlämning av frontend
+
+Eleverna ska skapa en tydlig dokumentation av sin kodbas. Gör detta i en README-fil (finns redan, skapa en sektion för frontend). Detta kan inkludera t.ex (endast det som är relevant för ert projekt):
+
+README.md – En fil som beskriver projektet, dess syfte, hur man kör det, och vilka teknologier som används.
+Kodstruktur och arkitektur – En kort beskrivning av mappstrukturen och viktiga filer.
+Setup och installation – Instruktioner om hur man installerar och kör projektet lokalt. Behövs något för att köra koden t.ex Sass compiler?
+Kodbibliotek & teknologier - Vilka kodbibliotek används i projektet? Länka till dokumentation.
+Förbättringspunkter - Finns det platser i kodbasen ni skulle önska förbättra/skriva om i mån av tid?
+Hjälp-funktioner (t.ex för API-anrop) - Vilka funktioner kan/bör återanvändas genomgående i projektet, och vart hittar man dem?
+
+# Projektnamn: Hakim Livs
 
 # Projektbeskrivning
 En fil som beskriver projektet, dess syfte, hur man kör det, och vilka teknologier som används.
