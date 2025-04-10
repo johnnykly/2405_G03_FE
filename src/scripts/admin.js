@@ -12,9 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   
       if (!token || !(user?.role === 'admin')) { 
-        console.log("No valid admin session found (token missing or user not admin role), redirecting...");
+        console.log("No valid admin session found, redirecting...");
+        alert("Behörighet saknas. Kontakta webbansvarig."); 
         window.location.href = '/index.html'; 
-        return; 
+        return;
     }
       console.log("Admin authenticated. Token:", token ? 'Exists' : 'Missing', "User:", user);
       let isEditMode = false; 
