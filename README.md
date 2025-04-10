@@ -1,47 +1,24 @@
 # Hakim Livs
-**Front-End Dokumentation** för Hakim Livs.
-
-## Projektbeskrivning
-En fil som beskriver projektet, dess syfte, hur man kör det, och vilka teknologier som används.
-
-- Detta är ett skräddarsytt projekt som utvecklades under en månadslång skräddarsydd agile-skrum-collaboration mellan 3 frontend-utvecklare, 2 backend-utvecklare och 3 kvalitetstester.
-
-- Projektet startade den 17 mars 2025 och syftar till att skapa en webbshop, Hakim Livs, där användare kan köpa produkter på nätet.
-
-- Projektet innehåller följande viktiga funktioner:
-
-_Vanliga användare_
-
-- Medlemskap och autentisering: 
- Användare kan skapa ett konto genom att registrera sig med e-post och lösenord. De kan sedan logga in med sina uppgifter. Inloggning och registrering är säkrad med JWT (JSON Web Tokens) för autentisering.
-
-Produktrelaterad funktionalitet
-Användare kan:
-
-- Bläddra bland produkter.
-
-- Lägga produkter i kundvagnen.
-
-- Genomföra köp genom en säker betalningsgateway (finns i nästa utvecklingsfas).
-
-Admin (Hakim):
-
-- **Admin Panel (Backoffice)**: 
-- Administratörer, såsom Hakim, kan hantera produktinformationen, användare och ordrar genom en admin-panel. Denna panel gör det möjligt för administratörer att:
-
- - Skapa, uppdatera och ta bort produkter.
-
- - Se och hantera användarkonton och orderhistorik.
-
-Säkerhet och behörigheter
-- Endast användare med administratörsbehörighet kan få åtkomst till admin-panelen. Säker autentisering och behörighetskontroll implementeras via JWT, där admin-användare identifieras och autentiseras.
-
-## Syfte
-
-Lorem ipsum dolor
+Hakim Livs är en digitalisering av matbutiken med samma namn med huvudsyftet att tillgängliggöra e-handel från Hakim Livs till dess kunder. Projektet består av frontend, backend och har under projektet testats av kvalitetstestare.
+Projektet innehåller följande viktiga funktioner:
+- Inloggning och registrering
+- Användare
+    - User (Besökare och kunder)
+    - Admin (Användare med admin-åtkomst för hantering av sidans innehåll)
+- Produktvy
+- Kategorivy
+- Varukorg och kassa med funktionalitet
+- Sökfunktion för produkter och kategorier
+- Admin-panel
+    - Hantering av produkter (Visa, skapa, redigera och ta bort)
+    - Hantering av kategorier (Visa)
+    - Hantering av kunder (Visa)
+    - Hantering av ordrar (Visa)
+    - Låst åtkomst för icke-behöriga användare
 
 ##  Mappstruktur och arkitektur
 Projektet är uppdelat i följande huvudmappar:
+
 ```
 /src
     /data
@@ -66,24 +43,30 @@ admin.css
 ## Setup och installation
 För att köra projektet lokalt:
 
-- Klona repot:
-git clone [https://github.com/johnnykly/2405_G03_FE/]
+1. Klona repot: [https://github.com/johnnykly/2405_G03_FE/] alternativt ladda ner .zip-filen och öppna i kodhanterare.
+2. Öppna repot i kodhanterare
+3. Installera och öppna med t.ex. Live Server för att skapa en lokal server
 
-- Navigera till projektmappen:
-cd ditt-projekt
 
-- Installera beroenden:
-npm install
+För att deploya projektet:
+1. Klona repot: [https://github.com/johnnykly/2405_G03_FE/] alternativt ladda ner .zip-filen och öppna i kodhanterare.
+2. Pusha repot till GitHub
+3. Skapa ett konto på t.ex. Vercel
+4. Koppla ihop repots aktuella branch med ett Vercel-projekt (Rekommenderat att aktivera automatic deploy för automatiska uppdateringar)
+5. Publicera Vercel-projekt
+```
+Användning och hantering av backend-kod hänvisas till backends readme.md
+```
 
-- Starta utvecklingsservern:
-npm run dev
 
 ## Kodbibliotek
-- HTML5 – Struktur och layout på webbplatsen.
-- CSS – För stilhantering på frontend.
-- JavaScript – För både frontend och backend.
-- Font Awesome - Ikongrafik på webbplatsen.
-- Figma – För design och UI/UX prototyper.
+|Teknologi       |Användning       |
+|  ---  |  ---  |
+|HTML5       |Struktur och layout på webbsidan.       |
+|CSS       |Design för webbsidan.       |
+|JavaScript       |Funktionalitet på webbsidan.       |
+|Font Awesome       |Ikongrafik på webbsidan.       |
+|Figma       |Design för UI/UX prototyper       |
 
 ## Endpoints (API)
 |Metod       |Endpoint       |Beskrivning       |
@@ -104,56 +87,24 @@ npm run dev
 |PUT       |/orders/:id/cancel       |Avbryt order       |
 
 ```
-Ansluten till API via [https://grupp-3.vercel.app/api/]
+Ansluten till backend-API via [https://grupp-3.vercel.app/api/]
 ```
 ## Miljöer
 ### Deployment
-**Frontend**
-- [https://2405-g03-fe.vercel.app/]
+Miljö Beskrivning Fork source GitHub URL
 
-**Backend**
-- [https://webshop-2025-be-g1.vercel.app/]
+|Miljö       |Beskrivning       |Fork source       |Källa       |URL       |
+|  ---  |  ---  |  ---  |  ---  |  ---  |
+|Production       |Frontend       |https://github.com/Jonatan-Vahlberg-WAS/BE-Webshop-2025-FE       |GitHub       |https://github.com/johnnykly/2405_G03_FE/       |
+|Production       |Backend       |https://github.com/Nackademin-BE-1-Admin/Webshop-2025-BE-G1       |GitHub       |https://github.com/SandraLinnea/Grupp-3       |
+|Deployed       |Frontend Live       |       |Vercel       |https://2405-g03-fe.vercel.app/       |
+|Deployed       |Backend Live       |       |Vercel       |https://webshop-2025-be-g1.vercel.app/       |
+|Development       |Frontend       |       |Localhost       |http://localhost:5500       |
+|Development       |Backend       |       |Localhost       |http://localhost:3000       |
+|Design       |UX/UI Mockups      |       |Figma       |https://www.figma.com/design/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1       |
+|Design       |UX/UI Prototype       |       |Figma       |https://www.figma.com/proto/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1       |
 
-### Production
-**Frontend**
-- V1: [https://github.com/johnnykly/2405_G03_FE/]
-- V2: []
-- fork source [https://github.com/Jonatan-Vahlberg-WAS/BE-Webshop-2025-FE]
 
-**Backend**
-- V1: [https://github.com/SandraLinnea/Grupp-3]
-- fork source [https://github.com/Nackademin-BE-1-Admin/Webshop-2025-BE-G1]
-
-**Website mockup**
-- Figma [https://www.figma.com/design/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1]
-- Figma (prototype) [https://www.figma.com/proto/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1]
-
-### Development
-**Frontend**
-- http://localhost:5500
-
-**Backend**
-- http://localhost:3000
-
-## Deployment 
-```
-- Vercel konto: Skapa ett Vercel-konto eller logga in på Vercel.
-- Deploy till Vercel: Koppla Vercel till ditt GitHub-konto och välj repositoryn för att distribuera applikationen.
-- Automatisk deploy: När du pushar nya ändringar till GitHub kommer applikationen automatiskt att uppdateras och distribueras på Vercel.
-
-# Steg för steg info om hur man deployar hela siten till en ny server
-- Frontend
-1. Clone frontend repository
-2. Skapa vercel-sida
-3. Connecta github repo main branch med vercel
-4. Pusha koden till main branch
-5. Deploy vercel-sida
-- Automatisk deploy: När du pushar nya ändringar till GitHub kommer applikationen automatiskt att uppdateras och distribueras på Vercel.
-```
-
-- Backend
-Hänvisning till backend och readme.md
-Ansök om åtkomst till admin
 
 ## Enkel vägledning för användning av siten
 
@@ -168,100 +119,15 @@ Ansök om åtkomst till admin
 ## Hjälp-funktioner (t.ex för API-anrop) - Vilka funktioner kan/bör återanvändas genomgående i projektet, och vart hittar man dem?
 
 ### Funktioner 
-src/utils/api.js
 
-Detta är huvudfilen för alla API-anrop. Den innehåller autentisering via JWT, dynamisk URL-hantering och funktioner för CRUD-operationer.
-
-Funktioner:
-	•	getToken()
-Hämtar JWT-token från sessionStorage.
-	•	getBaseUrl()
-Returnerar rätt bas-URL beroende på om projektet körs lokalt eller i produktion.
-	•	fetchProducts()
-Hämtar alla produkter från API:t.
-	•	fetchCategories()
-Hämtar alla produktkategorier från API:t.
-	•	fetchUsers()
-Hämtar användare (kräver admin-token).
-	•	fetchOrders()
-Hämtar ordrar (kräver admin-token).
-	•	addProduct(productData)
-Lägger till en ny produkt (POST).
-	•	deleteProduct(productId)
-Tar bort en produkt med givet ID (DELETE).
-	•	fetchProductById(productId)
-Hämtar en specifik produkt med ID.
-	•	updateProduct(productId, productData)
-Uppdaterar en produkt med nytt data (PUT).
-
----
-detailModal.js
-
-Används för att visa en detaljerad produktmodal när en användare klickar på ett produktkort.
-
-Funktion:
-	•	showProductDetailModal(productTitle)
-Visar en modal med produktinformation baserat på titel. Hämtar produktdata från dummyProducts och skapar en DOM-struktur.
----
-index.js
-
-Hanterar startsidans dynamiska rendering av produkter och kategorier.
-
-Återanvändbara funktioner:
-	•	loadCategories()
-Hämtar och renderar kategori-knappar.
-	•	filterProductsByCategory(category)
-Filtrerar produkter baserat på vald kategori.
-	•	filterProductsBySearch(searchInput)
-Filtrerar produkter baserat på sökfältets input.
-	•	loadProducts(filteredProducts)
-Renderar produktkort baserat på ett produkt-array.
-	•	createProductCard(product)
-Skapar ett DOM-element för ett enskilt produktkort, inklusive event handlers för kundvagnshantering.
----
-order.js
-
-Används på ordersidan för att visa kundens varukorg, fylla i formulärdata och skicka beställningar.
-
-Innehåller:
-	•	Formulärhantering med FormData
-	•	Sammanställning av orderItems med kvantitet
-	•	Beräkning av totalPrice
-	•	Autofyll av formulär om användaren är inloggad
-	•	POST-anrop till API:t för att lägga order
----
-login.js
-
-Hanterar login och registrering.
-
-Funktionalitet:
-	•	submit-event för login-formuläret
-Skickar POST-anrop till /auth/login, sparar JWT-token + user i sessionStorage.
-	•	submit-event för register-formuläret
-Skickar POST-anrop till /auth/register.
-	•	DOM-hantering för att växla mellan login och registreringsvyer.
----
-admin.js
-
-Den mest omfattande filen, ansvarig för adminpanelen. Innehåller dynamisk DOM-hantering för att visa, redigera, uppdatera och radera produkter, användare, ordrar och kategorier.
-
-Återanvändbara funktioner:
-	•	showSection(id)
-Visar rätt innehållssektion i adminpanelen. Kan återanvändas för andra “single-page-style”-vyer.
-	•	resetEditMode()
-Återställer formuläret till standardläge. Bra för redigeringsformulär generellt.
-	•	loadCategories()
-(Separat från index.js!) Laddar kategorier till select-fält i formulär.
-	•	loadProductList(), loadCustomerList(), loadOrderList(), loadCategoryList()
-Async-funktioner som hämtar data från API:t och renderar det i tabeller.
-	•	handleEditProduct(productId), handleDeleteProduct(productId)
-Funktioner för att hantera redigering och radering av produkter.
-
-
-### Testverktyg
-- Postman
-Testning av backend och 
-- MongoDB
+| Fil                         | Syfte                                                                 | Funktioner                                                                 |
+|----------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| `src/utils/api.js`         | Huvudfil för API-anrop med JWT-autentisering och dynamisk URL-hantering       | `getToken()`, `getBaseUrl()`, `fetchProducts()`, `fetchCategories()`, `fetchUsers()`, `fetchOrders()`, `addProduct()`, `deleteProduct()`, `fetchProductById()`, `updateProduct()` |
+| `src/scripts/detailModal.js`| Visar produktmodal med detaljer från `dummyProducts`                          | `showProductDetailModal(productTitle)` – bygger och visar DOM-baserad modal               |
+| `src/scripts/index.js`     | Dynamisk rendering av produkter och kategorier på startsidan                  | `loadCategories()`, `filterProductsByCategory()`, `filterProductsBySearch()`, `loadProducts()`, `createProductCard()` |
+| `src/scripts/order.js`     | Hanterar varukorg, formulär och beställningar på ordersidan                   | FormData-hantering, `orderItems`, `totalPrice`, autofyll, och POST-anrop till API         |
+| `src/scripts/login.js`     | Inloggning och registrering med vyhantering                                  | `submit` events för login/register, JWT-hantering, vyväxling mellan login och registrering |
+| `src/scripts/admin.js`     | Adminpanelens logik och dynamisk DOM-hantering för CRUD på data               | `showSection()`, `resetEditMode()`, `loadCategories()`, `loadProductList()`, `loadCustomerList()`, `loadOrderList()`, `loadCategoryList()`, `handleEditProduct()`, `handleDeleteProduct()` |
 
 
 ## Förbättringspunkter
@@ -275,6 +141,7 @@ Testning av backend och
 
 ### Performance
 - Optimering av databasfrågor för bättre prestanda.
+- Optimering av bilder t.ex. komprimering för webbstandard.
 
 ### Styling
 - Förbättrat användargränssnitt av
@@ -284,3 +151,4 @@ Testning av backend och
     - Sidomeny
     - Header
     - Footer
+- Förbättring av tillgänglighet som t.ex. färger och bättre mobilanpassning
