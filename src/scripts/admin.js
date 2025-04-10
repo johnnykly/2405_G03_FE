@@ -120,15 +120,15 @@ document.addEventListener("DOMContentLoaded", () => {
           const orders = await fetchOrders(); tableBody.innerHTML = '';
           if (orders && orders.length > 0) {
                orders.forEach(order => { 
+                const row = document.createElement('tr');  
                 const email = order.email || '-'; 
-                const firstName = order.firstname || '-'; 
-                const lastName = order.lastname || '-'; 
-                const phone = order.phonenumber || '-'; 
-                const address = order.shippingAddress?.street ? `${order.shippingAddress.street}, ${order.shippingAddress.number}, ${order.shippingAddress.zipCode} ${order.shippingAddress.city}` : '-'; 
+                const firstname = order.firstname || '-'; 
+                const lastname = order.lastname || '-'; 
+                const phonenumber = order.phonenumber || '-'; 
+                const shippingAddress = order.shippingAddress ? `${order.shippingAddress.street} ${order.shippingAddress.number}, ${order.shippingAddress.zipCode}, ${order.shippingAddress.city}`||  : '-'; 
                 const totalPrice = order.totalPrice || '-';
                 const orderNumber = order.orderNumber || '-';
                 const status = order.status || '-';
-                const row = document.createElement('tr');  
                 const orderMongoId = order._id || null; row.innerHTML = `<td>${orderId}</td><td>${firstName}</td><td>${lastName}</td><td>${address}</td><td>${phone}</td><td>${email}</td><td>${total}</td><td> <button class="btn-icon btn-view-order" data-id="${orderMongoId}" ${!orderMongoId ? 'disabled' : ''} aria-label="Visa orderdetaljer"><i class="fas fa-search" aria-hidden="true"></i></button></td>`; tableBody.appendChild(row); });
           } else { tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center;">Inga ordrar hittades.</td></tr>`; }
       } catch (error) { console.error("Error loading order list:", error); tableBody.innerHTML = ''; errorElement.textContent = 'Kunde inte ladda orderlistan. Autentisering eller API kan saknas.'; errorElement.style.display = 'block'; }
