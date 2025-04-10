@@ -1,28 +1,173 @@
-- URL till alla GitHub-Repon (källkoden)
-- Info om hur man deployar koden.
-- En lista över alla endpoints (API) med exempel
-- Steg för steg info om hur man deployar hela siten till en ny server
-- Enkel vägledning för användning av siten
-- Eventuella gruppspesifika login såsom inlogg till atlas sålänge de inte är kopplade till privata mailadresser (frivilligt)
-- Postman export (frivilligt)
-- Enviroment variabler som används lokalt
-- Enviroment variabler som används i deployat läge
-- Information om hur man startar projektet lokalt
- 
+# Hakim Livs
+**Front-End Dokumentation**
+##  Kodstruktur och arkitektur
+Projektet är uppdelat i följande huvudmappar:
+/src
+    /data
+    /images
+        /products
+    /scripts
+    /utils
+/public
+/css
+index.html
+main.js
+admin.html
+login.html
+order.html
 
-Detta dokument måste finnas på er Confluence inför presentationen.
- 
+## Setup och installation
+För att köra projektet lokalt:
 
-Överlämning av frontend
+Klona repot:
 
-Eleverna ska skapa en tydlig dokumentation av sin kodbas. Gör detta i en README-fil (finns redan, skapa en sektion för frontend). Detta kan inkludera t.ex (endast det som är relevant för ert projekt):
+git clone https://github.com/ditt-användarnamn/ditt-projekt.git
+Navigera till projektmappen:
 
-README.md – En fil som beskriver projektet, dess syfte, hur man kör det, och vilka teknologier som används.
-Kodstruktur och arkitektur – En kort beskrivning av mappstrukturen och viktiga filer.
-Setup och installation – Instruktioner om hur man installerar och kör projektet lokalt. Behövs något för att köra koden t.ex Sass compiler?
-Kodbibliotek & teknologier - Vilka kodbibliotek används i projektet? Länka till dokumentation.
-Förbättringspunkter - Finns det platser i kodbasen ni skulle önska förbättra/skriva om i mån av tid?
-Hjälp-funktioner (t.ex för API-anrop) - Vilka funktioner kan/bör återanvändas genomgående i projektet, och vart hittar man dem?
+cd ditt-projekt
+Installera beroenden:
+
+npm install
+Starta utvecklingsservern:
+
+npm run dev
+Notis: Projektet använder Sass, så en Sass-kompilator krävs. Den hanteras automatiskt via vite/webpack/parcel (beroende på vad ni använder – skriv in det du använder här).
+
+## Kodbibliotek
+- HTML5 – Struktur och layout på webbplatsen.
+- CSS – För stilhantering på frontend.
+- JavaScript – För både frontend och backend.
+- Font Awesome - Ikongrafik på webbplatsen
+- Figma – För design och UI/UX prototyper.
+
+
+## Länkar
+### Deployment
+
+Git: 
+V1: [https://github.com/johnnykly/2405_G03_FE/]
+V2: []
+fork source [https://github.com/Jonatan-Vahlberg-WAS/BE-Webshop-2025-FE]
+
+Backend kod: [https://github.com/SandraLinnea/Grupp-3]
+fork source [https://github.com/Nackademin-BE-1-Admin/Webshop-2025-BE-G1]
+
+LIVE FRONTEND:[https://2405-g03-fe.vercel.app/]
+LIVE BACKEND: [https://webshop-2025-be-g1.vercel.app/]
+
+Figma [https://www.figma.com/design/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1]
+Figma (prototype) [https://www.figma.com/proto/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1]
+
+
+## Installation och Setup
+Frontend Setup
+Ladda ner/klona frontend-projektet:
+
+Gå till -> Frontend Repository
+Klicka på den gröna knappen "Code"
+Välj "Download ZIP" eller kopiera länken för att klona
+Packa upp zip-filen om du laddade ner den
+Öppna mappen i VS Code
+Kör med Live Server:
+
+Installera Live Server extension i VS Code om du inte redan har det
+Högerklicka på index.html
+Välj "Open with Live Server" Frontend körs nu på http://localhost:5500
+
+
+# Miljöer
+## 🔧 Development
+Backend: http://localhost:3000
+Frontend: http://localhost:5500
+
+## 🚀 Production
+Backend: LIVE
+Frontend: LIVE
+
+
+## 🗄️ Databas (Supabase)
+Supabase används som databas
+
+Be produktägaren (PO) om tillgång till login och nycklar
+
+Databasen och dess struktur är dokumenterad i Supabase-projektet
+
+
+1. **fork repo** och **git clone repo**
+```bash
+ Jonatan-Vahlberg-WAS/BE-Webshop-2025-FE
+```
+
+```bash
+https://github.com/johnnykly/2405_G03_FE
+```
+2. Vercel- och GitHub-integration:
+
+- Vercel konto: Skapa ett Vercel-konto eller logga in på Vercel.
+- Deploy till Vercel: Koppla Vercel till ditt GitHub-konto och välj repositoryn för att distribuera applikationen.
+- Automatisk deploy: När du pushar nya ändringar till GitHub kommer applikationen automatiskt att uppdateras och distribueras på Vercel.
+
+# En lista över alla endpoints (API) med exempel
+- Lista på endpoints
+
+    "auth":
+      "POST /api/auth/register": "Register a new user",
+      "POST /api/auth/login": "Login with username and password"
+
+    "products": 
+      "GET /api/products": "Get all products",
+      "GET /api/products/:id": "Get a single product by ID",
+      "POST /api/products": "Create a new product (Admin only)",
+      "PUT /api/products/:id": "Update a product (Admin only)",
+      "DELETE /api/products/:id": "Delete a product (Admin only)"
+    
+    "categories": 
+      "GET /api/categories": "Get all categories"
+    
+    "orders": 
+      "GET /api/orders": "Get all orders (Admin only)",
+      "GET /api/orders/:id": "Get a specific order",
+      "GET /api/orders/user/myorders": "Get current user's orders",
+      "POST /api/orders": "Create a new order",
+      "PUT /api/orders/:id/status": "Update order status (Admin only)",
+      "PUT /api/orders/:id/cancel": "Cancel order"
+
+
+Connected to backend index.js
+[https://grupp-3.vercel.app/api/]
+
+# Steg för steg info om hur man deployar hela siten till en ny server
+- Frontend
+1. Clone frontend repository
+2. Skapa vercel-sida
+3. Connecta github repo main branch med vercel
+4. Pusha koden till main branch
+5. Deploy vercel-sida
+- Automatisk deploy: När du pushar nya ändringar till GitHub kommer applikationen automatiskt att uppdateras och distribueras på Vercel.
+
+- Backend
+Hänvisning till backend och readme.md
+
+# Enkel vägledning för användning av siten
+- index.html
+
+--order.html
+
+--login.html
+
+- admin.html
+
+# Enviroment variabler som används lokalt
+
+# Enviroment variabler som används i deployat läge
+
+# Information om hur man startar projektet lokalt 
+
+# Kodstruktur och arkitektur – En kort beskrivning av mappstrukturen och viktiga filer.
+
+# Hjälp-funktioner (t.ex för API-anrop) - Vilka funktioner kan/bör återanvändas genomgående i projektet, och vart hittar man dem?
+
+---------
 
 # Projektnamn: Hakim Livs
 
@@ -47,8 +192,6 @@ En fil som beskriver projektet, dess syfte, hur man kör det, och vilka teknolog
 
 - Genomföra köp genom en säker betalningsgateway (finns i nästa utvecklingsfas).
 
-- **API-integration med backend** : Alla produktuppgifter, användarhantering och orderdata hanteras genom en REST API som är integrerad med backend-servern.
-
 ## Admin (Hakim):
 
 - **Admin Panel (Backoffice)**: 
@@ -60,63 +203,23 @@ En fil som beskriver projektet, dess syfte, hur man kör det, och vilka teknolog
 
 - **Säkerhet och behörigheter** : Endast användare med administratörsbehörighet kan få åtkomst till admin-panelen. Säker autentisering och behörighetskontroll implementeras via JWT, där admin-användare identifieras och autentiseras.
 
-## Syfte
-Beskriv kortfattat projektets syfte, exempelvis vad applikationen gör och vilket problem den löser.
-
-
-
 ## Teknologier
+Länka till dokumentation.
 
 - **Frontend:** Beskriv vilka teknologier och ramverk som används för frontend, 
-
 - **Övrigt:** Nämn alla andra teknologier som används (t.ex. API:er, externa tjänster etc.)
 
 # Kodstruktur och Arkitektur
 En kort beskrivning av mappstrukturen och viktiga filer.
 
-
-
-
 ## Mappstruktur
 Beskriv kort strukturen av projektets mappar och vad de innehåller.
 
-
-
-
-## Använd språk:
-
-- JavaScript – För både frontend och backend.
-
-- Vanilla CSS – För stilhantering på frontend.
-
-- HTML5 – Struktur och layout på webbplatsen.
-
-- Figma – För design och UI/UX prototyper.
-
-## Installation och Setup
-
-1. **fork repo** och **git clone repo**
-```bash
- Jonatan-Vahlberg-WAS/BE-Webshop-2025-FE
-```
-
-```bash
-https://github.com/johnnykly/2405_G03_FE
-```
-2. Vercel- och GitHub-integration:
-
-- Vercel konto: Skapa ett Vercel-konto eller logga in på Vercel.
-
-- Deploy till Vercel: Koppla Vercel till ditt GitHub-konto och välj repositoryn för att distribuera applikationen.
-
-- Automatisk deploy: När du pushar nya ändringar till GitHub kommer applikationen automatiskt att uppdateras och distribueras på Vercel.
 
 # Förbättringspunkter
 
 Finns det platser i kodbasen ni skulle önska förbättra/skriva om i mån av tid?
 
 - Refaktorering av vissa funktioner för att minska komplexiteten.
-
 - Optimering av databasfrågor för bättre prestanda.
-
 - Implementering av mer omfattande tester för API-rutter och funktionalitet.
