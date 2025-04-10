@@ -44,7 +44,6 @@ if (shoppingCart) {
       productExists = 0;
       let item = {
         productId: product._id,
-        product: product.title,
         quantity: productQuantity,
       };
       orderItems.push(item);
@@ -88,19 +87,13 @@ if (shoppingCart) {
         city: formData.get("city"),
       },
       orderItem: orderItems,
-      totalPrice: totOrderPrice,
     };
 
     const jwt = sessionStorage.getItem("token");
     const apiUrl = "https://grupp-3.vercel.app/api/orders/";
 
     axios
-      .post(apiUrl, userData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt}`, // Add the JWT token in the Authorization header.
-        },
-      })
+      .post(apiUrl, userData)
       .then((response) => {
         console.log("Response:", response.data);
       })
