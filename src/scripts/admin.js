@@ -120,13 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
           const orders = await fetchOrders(); tableBody.innerHTML = '';
           if (orders && orders.length > 0) {
                orders.forEach(order => { 
-                const row = document.createElement('tr');  
-                const orderId = order.orderNumber || order._id || 'N/A'; 
+                const email = order.user?.email || '-'; 
                 const firstName = order.user?.firstName || order.shippingAddress?.firstName || '-'; 
                 const lastName = order.user?.lastName || order.shippingAddress?.lastName || '-'; 
-                const address = order.shippingAddress?.street ? `${order.shippingAddress.street}, ${order.shippingAddress.zipCode} ${order.shippingAddress.city}` : '-'; 
                 const phone = order.shippingAddress?.phone || '-'; 
-                const email = order.user?.email || '-'; 
+                const address = order.shippingAddress?.street ? `${order.shippingAddress.street}, ${order.shippingAddress.zipCode} ${order.shippingAddress.city}` : '-'; 
+                const row = document.createElement('tr');  
+                const orderId = order.orderNumber || order._id || 'N/A'; 
                 const total = typeof order.totalAmount === 'number' ? order.totalAmount.toFixed(2) : 'N/A'; 
                 const orderMongoId = order._id || null; row.innerHTML = `<td>${orderId}</td><td>${firstName}</td><td>${lastName}</td><td>${address}</td><td>${phone}</td><td>${email}</td><td>${total}</td><td> <button class="btn-icon btn-view-order" data-id="${orderMongoId}" ${!orderMongoId ? 'disabled' : ''} aria-label="Visa orderdetaljer"><i class="fas fa-search" aria-hidden="true"></i></button></td>`; tableBody.appendChild(row); });
           } else { tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center;">Inga ordrar hittades.</td></tr>`; }
