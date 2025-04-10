@@ -1,5 +1,6 @@
 # Hakim Livs
-**Front-End Dokumentation**
+**Front-End Dokumentation** för Hakim Livs.
+
 ##  Kodstruktur och arkitektur
 Projektet är uppdelat i följande huvudmappar:
 /src
@@ -10,28 +11,23 @@ Projektet är uppdelat i följande huvudmappar:
     /utils
 /public
 /css
-index.html
-main.js
-admin.html
-login.html
-order.html
 
 ## Setup och installation
 För att köra projektet lokalt:
 
-Klona repot:
+- Klona repot:
+git clone [https://github.com/johnnykly/2405_G03_FE/]
 
-git clone https://github.com/ditt-användarnamn/ditt-projekt.git
-Navigera till projektmappen:
-
+- Navigera till projektmappen:
 cd ditt-projekt
-Installera beroenden:
 
+- Installera beroenden:
 npm install
-Starta utvecklingsservern:
 
+- Starta utvecklingsservern:
 npm run dev
-Notis: Projektet använder Sass, så en Sass-kompilator krävs. Den hanteras automatiskt via vite/webpack/parcel (beroende på vad ni använder – skriv in det du använder här).
+
+
 
 ## Kodbibliotek
 - HTML5 – Struktur och layout på webbplatsen.
@@ -40,66 +36,55 @@ Notis: Projektet använder Sass, så en Sass-kompilator krävs. Den hanteras aut
 - Font Awesome - Ikongrafik på webbplatsen
 - Figma – För design och UI/UX prototyper.
 
+## Endpoints (API)
+|Metod       |Endpoint       |Beskrivning       |
+|  ---  |  ---  |  ---  |
+|POST       |auth/register       |Registrera ny användare       |
+|POST       |auth/login       |Logga in med användare och lösenord       |
+|GET       |/products       |Hämta produkter       |
+|GET       |/products/:id       |Hämta produkt per ID       |
+|POST       |/products       |Skapa ny produkt       |
+|PUT       |/products/:id       |Uppdatera en produkt       |
+|DELETE       |/products/:id       |Radera en produkt       |
+|GET       |/categories       |Hämta alla kategorier       |
+|GET       |/orders       |Hämta alla ordrar       |
+|GET       |/orders/:id       |Hämta en specifik order per ID       |
+|GET       |/orders/user/myorders       |Hämta nuvarande användares ordrar       |
+|POST       |/orders       |Skapa en ny order       |
+|PUT       |/orders/:id/status       |Uppdatera orderstatus       |
+|PUT       |/orders/:id/cancel       |Avbryt order       |
 
-## Länkar
+
+## Miljöer
 ### Deployment
+**Frontend**
+- [https://2405-g03-fe.vercel.app/]
 
-Git: 
-V1: [https://github.com/johnnykly/2405_G03_FE/]
-V2: []
-fork source [https://github.com/Jonatan-Vahlberg-WAS/BE-Webshop-2025-FE]
+**Backend**
+- [https://webshop-2025-be-g1.vercel.app/]
 
-Backend kod: [https://github.com/SandraLinnea/Grupp-3]
-fork source [https://github.com/Nackademin-BE-1-Admin/Webshop-2025-BE-G1]
+### Production
+**Frontend**
+- V1: [https://github.com/johnnykly/2405_G03_FE/]
+- V2: []
+- fork source [https://github.com/Jonatan-Vahlberg-WAS/BE-Webshop-2025-FE]
 
-LIVE FRONTEND:[https://2405-g03-fe.vercel.app/]
-LIVE BACKEND: [https://webshop-2025-be-g1.vercel.app/]
+**Backend**
+- V1: [https://github.com/SandraLinnea/Grupp-3]
+- fork source [https://github.com/Nackademin-BE-1-Admin/Webshop-2025-BE-G1]
 
-Figma [https://www.figma.com/design/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1]
-Figma (prototype) [https://www.figma.com/proto/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1]
+**Website mockup**
+- Figma [https://www.figma.com/design/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1]
+- Figma (prototype) [https://www.figma.com/proto/NHNyjULjqwIqo7E0so7iwT/2405%3A-Hakim-Livs?node-id=0-1&t=rvliz4jTLEXBngk6-1]
 
+### Development
+**Frontend**
+- http://localhost:5500
 
-## Installation och Setup
-Frontend Setup
-Ladda ner/klona frontend-projektet:
-
-Gå till -> Frontend Repository
-Klicka på den gröna knappen "Code"
-Välj "Download ZIP" eller kopiera länken för att klona
-Packa upp zip-filen om du laddade ner den
-Öppna mappen i VS Code
-Kör med Live Server:
-
-Installera Live Server extension i VS Code om du inte redan har det
-Högerklicka på index.html
-Välj "Open with Live Server" Frontend körs nu på http://localhost:5500
+**Backend**
+- http://localhost:3000
 
 
-# Miljöer
-## 🔧 Development
-Backend: http://localhost:3000
-Frontend: http://localhost:5500
-
-## 🚀 Production
-Backend: LIVE
-Frontend: LIVE
-
-
-## 🗄️ Databas (Supabase)
-Supabase används som databas
-
-Be produktägaren (PO) om tillgång till login och nycklar
-
-Databasen och dess struktur är dokumenterad i Supabase-projektet
-
-
-1. **fork repo** och **git clone repo**
-```bash
- Jonatan-Vahlberg-WAS/BE-Webshop-2025-FE
-```
-
-```bash
-https://github.com/johnnykly/2405_G03_FE
 ```
 2. Vercel- och GitHub-integration:
 
@@ -107,30 +92,6 @@ https://github.com/johnnykly/2405_G03_FE
 - Deploy till Vercel: Koppla Vercel till ditt GitHub-konto och välj repositoryn för att distribuera applikationen.
 - Automatisk deploy: När du pushar nya ändringar till GitHub kommer applikationen automatiskt att uppdateras och distribueras på Vercel.
 
-# En lista över alla endpoints (API) med exempel
-- Lista på endpoints
-
-    "auth":
-      "POST /api/auth/register": "Register a new user",
-      "POST /api/auth/login": "Login with username and password"
-
-    "products": 
-      "GET /api/products": "Get all products",
-      "GET /api/products/:id": "Get a single product by ID",
-      "POST /api/products": "Create a new product (Admin only)",
-      "PUT /api/products/:id": "Update a product (Admin only)",
-      "DELETE /api/products/:id": "Delete a product (Admin only)"
-    
-    "categories": 
-      "GET /api/categories": "Get all categories"
-    
-    "orders": 
-      "GET /api/orders": "Get all orders (Admin only)",
-      "GET /api/orders/:id": "Get a specific order",
-      "GET /api/orders/user/myorders": "Get current user's orders",
-      "POST /api/orders": "Create a new order",
-      "PUT /api/orders/:id/status": "Update order status (Admin only)",
-      "PUT /api/orders/:id/cancel": "Cancel order"
 
 
 Connected to backend index.js
