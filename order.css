@@ -6,6 +6,26 @@ body {
   display: grid;
   justify-content: center;
 
+  header {
+    position: sticky;
+    width: 100vw;
+    background: #eaeaea;
+    .site-header {
+      top: 0;
+      width: 100%;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      height: 4rem;
+      display: grid;
+      align-items: center;
+    }
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
   .content {
     display: grid;
     justify-items: center;
@@ -17,6 +37,7 @@ body {
 
     .shopping-cart-content {
       display: grid;
+      max-width: 600px;
       width: 100%;
 
       .shopping-cart-item {
