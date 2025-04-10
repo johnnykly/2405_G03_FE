@@ -44,7 +44,9 @@ if (shoppingCart) {
       productExists = 0;
       let item = {
         productId: product._id,
+        product: "test",
         quantity: productQuantity,
+        price: 100,
       };
       orderItems.push(item);
     }
