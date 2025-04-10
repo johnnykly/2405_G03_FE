@@ -54,10 +54,13 @@ export async function addProduct(productData) {
   const url = `${getBaseUrl()}api/products`; console.log(`Attempting to POST product to: ${url}`);
   try {
     const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' /* + Auth */ }, body: JSON.stringify(productData) });
+    
     if (response.ok) { const result = await response.json(); console.log("Product added via API:", result); return { success: true, data: result }; } 
+
     else { const errorData = await response.json().catch(() => ({ message: response.statusText })); console.error(`API Error adding product (${response.status}):`, errorData); return { success: false, status: response.status, error: errorData }; }
   } catch (error) { console.error('Network error adding product:', error); return { success: false, error: { message: error.message } }; }
 }
+
 
 export async function deleteProduct(productId) {
   const url = `${getBaseUrl()}api/products/${productId}`; console.log(`Attempting to DELETE product from: ${url}`);
@@ -68,6 +71,7 @@ export async function deleteProduct(productId) {
     else { const errorData = await response.json().catch(() => ({ message: response.statusText })); console.error(`API Error deleting product (${response.status}):`, errorData); return { success: false, status: response.status, error: errorData }; }
   } catch (error) { console.error('Network error deleting product:', error); return { success: false, error: { message: error.message } }; }
 }
+
 
 export async function fetchProductById(productId) {
   const url = `${getBaseUrl()}api/products/${productId}`;
@@ -87,6 +91,7 @@ export async function fetchProductById(productId) {
       return null;
   }
 }
+
 
 export async function updateProduct(productId, productData) {
 
