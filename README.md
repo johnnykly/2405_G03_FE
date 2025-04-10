@@ -25,7 +25,12 @@ Projektet är uppdelat i följande huvudmappar:
     /images
         /products
     /scripts
+        /admin.js
+        /index.js
+        /login.js
+        /order.js
     /utils
+        /api.js
 /public
 /css
 index.html
@@ -123,7 +128,6 @@ Miljö Beskrivning Fork source GitHub URL
 | Fil                         | Syfte                                                                 | Funktioner                                                                 |
 |----------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
 | `src/utils/api.js`         | Huvudfil för API-anrop med JWT-autentisering och dynamisk URL-hantering       | `getToken()`, `getBaseUrl()`, `fetchProducts()`, `fetchCategories()`, `fetchUsers()`, `fetchOrders()`, `addProduct()`, `deleteProduct()`, `fetchProductById()`, `updateProduct()` |
-| `src/scripts/detailModal.js`| Visar produktmodal med detaljer från `dummyProducts`                          | `showProductDetailModal(productTitle)` – bygger och visar DOM-baserad modal               |
 | `src/scripts/index.js`     | Dynamisk rendering av produkter och kategorier på startsidan                  | `loadCategories()`, `filterProductsByCategory()`, `filterProductsBySearch()`, `loadProducts()`, `createProductCard()` |
 | `src/scripts/order.js`     | Hanterar varukorg, formulär och beställningar på ordersidan                   | FormData-hantering, `orderItems`, `totalPrice`, autofyll, och POST-anrop till API         |
 | `src/scripts/login.js`     | Inloggning och registrering med vyhantering                                  | `submit` events för login/register, JWT-hantering, vyväxling mellan login och registrering |
