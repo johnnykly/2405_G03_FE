@@ -61,6 +61,15 @@ if (shoppingCart) {
     `;
   cartContainer.appendChild(element);
 
+  const userSessionStorageData = JSON.parse(sessionStorage.getItem("user"));
+
+  if (userSessionStorageData) {
+    document.getElementById("firstname").defaultValue =
+      userSessionStorageData.firstName;
+    document.getElementById("email").defaultValue =
+      userSessionStorageData.email;
+  }
+
   const formElem = document.querySelector("form");
 
   formElem.addEventListener("submit", (event) => {
@@ -81,14 +90,15 @@ if (shoppingCart) {
       orderItem: orderItems,
       totalPrice: totOrderPrice,
     };
-    console.log(userData);
-    const apiUrl = "https://grupp-3.vercel.app/api/orders";
+
+    const jwt = sessionStorage.getItem("token");
+    const apiUrl = "https://grupp-3.vercel.app/api/orders/";
 
     axios
       .post(apiUrl, userData, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("jwt")}`, // Add the JWT token in the Authorization header.
+          Authorization: `Bearer ${jwt}`, // Add the JWT token in the Authorization header.
         },
       })
       .then((response) => {
