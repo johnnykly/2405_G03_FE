@@ -266,7 +266,21 @@ Testning av backend och
 
 ## Förbättringspunkter
 
-Finns det platser i kodbasen ni skulle önska förbättra/skriva om i mån av tid?
+### Functionality
+- User token har mer användardata som kan användas för t.ex. autofyllning vid order
+- Förbättring av presentation av varukorg med t.ex. antal, pris och summa.
 - Refaktorering av vissa funktioner för att minska komplexiteten.
-- Optimering av databasfrågor för bättre prestanda.
 - Implementering av mer omfattande tester för API-rutter och funktionalitet.
+- Implementering av API-funktioner i adminpanelen såsom hantering av kunder, ordrar och kategorier
+
+### Performance
+- Optimering av databasfrågor för bättre prestanda.
+
+### Styling
+- Förbättrat användargränssnitt av
+    - Startsida
+    - Produktsida
+    - Inloggningssida
+    - Sidomeny
+    - Header
+    - Footer
