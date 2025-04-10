@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeLoginBtn = document.getElementById("closeLoginModal");
   const closeRegisterBtn = document.getElementById("closeRegisterModal");
 
-  // 🔁 전환 버튼
+  // switch 
   openRegisterLink?.addEventListener("click", (e) => {
     e.preventDefault();
     loginSection?.classList.add("hidden");
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     registerSection?.classList.add("hidden");
   });
 
-  // ✅ 로그인
+  // login 
   document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = document.getElementById("login-email").value.trim();
@@ -49,32 +49,32 @@ document.addEventListener("DOMContentLoaded", () => {
         alert(`Välkommen ${data.user.firstName}`);
         console.log("🔍 Användarroll:", data.user.role);
 
-        // ✅ alert 이후 안전한 리다이렉션
+        // redirektion efter alert
         setTimeout(() => {
           const role = data.user.role?.toLowerCase();
           console.log("🔁 Navigering baserat på roll:", role);
 
           if (role === "admin") {
-            console.log("✅ Admin → admin.html");
+            console.log("Admin → admin.html");
             window.location.href = "admin.html";
           } else if (role === "user") {
-            console.log("✅ Användare → index.html");
+            console.log(" Användare → index.html");
             window.location.href = "index.html";
           } else {
             console.warn("❓ Okänd roll – stannar kvar");
           }
         }, 100);
       } else {
-        console.warn("⛔ Inloggning misslyckades:", data.message);
+        console.warn(" Inloggning misslyckades:", data.message);
         alert(data.message || "Fel vid inloggning. Saknar behörighet.");
       }
     } catch (err) {
-      console.error("🚨 Fel vid inloggning:", err);
+      console.error("Fel vid inloggning:", err);
       alert("Något gick fel vid inloggning");
     }
   });
 
-  // ✅ 회원가입
+  // registering
   document.getElementById("registerForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const firstName = document.getElementById("reg-firstname").value.trim();
