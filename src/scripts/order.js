@@ -97,6 +97,9 @@ if (shoppingCart) {
       .then((response) => {
         console.log("Response:", response.data);
         alert("Din order är mottagen.");
+        localStorage.removeItem("Products");
+        formElem.reset();
+        window.location.href = "/";
       })
       .catch((error) => {
         console.error(
