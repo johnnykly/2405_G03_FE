@@ -35,7 +35,7 @@ if (shoppingCart) {
 
     productExists = 0;
     orderItems.forEach((item) => {
-      if (item.product === product.title) {
+      if (item.productId === product._id) {
         productExists++;
       }
     });
@@ -44,9 +44,7 @@ if (shoppingCart) {
       productExists = 0;
       let item = {
         productId: product._id,
-        product: "test",
         quantity: productQuantity,
-        price: 100,
       };
       orderItems.push(item);
     }
