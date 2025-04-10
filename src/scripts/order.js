@@ -54,7 +54,7 @@ if (shoppingCart) {
   element.className = "shopping-cart-item";
   element.innerHTML = `
     <div class="shopping-cart-item-info-tot-price">
-        <div>Totalt order pris:</div>
+        <div>Totalt:</div>
         <div>${totOrderPrice.toFixed(2)} kr</div>
     </div> 
     `;
@@ -96,7 +96,7 @@ if (shoppingCart) {
       .post(apiUrl, userData)
       .then((response) => {
         console.log("Response:", response.data);
-        alert("Din order är mottaget.");
+        alert("Din order är mottagen.");
       })
       .catch((error) => {
         console.error(
