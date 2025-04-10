@@ -90,14 +90,15 @@ if (shoppingCart) {
       },
       orderItem: orderItems,
     };
-
-    const jwt = sessionStorage.getItem("token");
+    console.log(userData);
+    //const jwt = sessionStorage.getItem("token");
     const apiUrl = "https://grupp-3.vercel.app/api/orders/";
 
     axios
       .post(apiUrl, userData)
       .then((response) => {
         console.log("Response:", response.data);
+        alert(response.data);
       })
       .catch((error) => {
         console.error(
