@@ -113,25 +113,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   async function loadOrderList() { 
-      const tableBody = document.getElementById('orderListBody'); const errorElement = document.getElementById('orderListError'); 
-      if (!tableBody || !errorElement) { 
-        return; } tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center;">Laddar ordrar...</td></tr>`; errorElement.textContent = ''; errorElement.style.display = 'none';
-      try {
-          const orders = await fetchOrders(); tableBody.innerHTML = '';
+      const tableBody = document.getElementById('orderListBody'); 
+      const errorElement = document.getElementById('orderListError'); 
+      
+      if (!tableBody || !errorElement) {
+        console.error("Required elements not found: #orderListBody or #orderListError");
+        return;
+    }   
+    tableBody.innerHTML = '';
+    errorElement.textContent = '';
+    errorElement.style.display = 'none';
+      
+        try {
+            const orders = await fetchOrders();
+            console.log("Fetched Orders:", orders);
+
+          
           if (orders && orders.length > 0) {
                orders.forEach(order => { 
                 const row = document.createElement('tr');  
+
                 const email = order.email || '-'; 
                 const firstname = order.firstname || '-'; 
                 const lastname = order.lastname || '-'; 
                 const phonenumber = order.phonenumber || '-'; 
-                const shippingAddress = order.shippingAddress ? `${order.shippingAddress.street} ${order.shippingAddress.number}, ${order.shippingAddress.zipCode}, ${order.shippingAddress.city}` : '-'; 
-                const totalPrice = order.totalPrice || '-';
+                const shippingAddress = order.shippingAddress || '-';
                 const orderNumber = order.orderNumber || '-';
+                const totalPrice = order.totalPrice || '-';
                 const status = order.status || '-';
-                const orderMongoId = order._id || null; row.innerHTML = `<td>${orderId}</td><td>${firstName}</td><td>${lastName}</td><td>${address}</td><td>${phone}</td><td>${email}</td><td>${total}</td><td> <button class="btn-icon btn-view-order" data-id="${orderMongoId}" ${!orderMongoId ? 'disabled' : ''} aria-label="Visa orderdetaljer"><i class="fas fa-search" aria-hidden="true"></i></button></td>`; tableBody.appendChild(row); });
+                const orderMongoId = order._id || null; row.innerHTML = `<td>${email}</td><td>${firstname}</td><td>${lastname}</td><td>${phonenumber}</td><td>${shippingAddress}</td><td>${orderNumber}</td><td>${totalPrice}</td><td>${status}</td><td> <button class="btn-icon btn-view-order" data-id="${orderMongoId}" ${!orderMongoId ? 'disabled' : ''} aria-label="Visa orderdetaljer"><i class="fas fa-search" aria-hidden="true"></i></button></td>`; tableBody.appendChild(row); });
           } else { tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center;">Inga ordrar hittades.</td></tr>`; }
-      } catch (error) { console.error("Error loading order list:", error); tableBody.innerHTML = ''; errorElement.textContent = 'Kunde inte ladda orderlistan. Autentisering eller API kan saknas.'; errorElement.style.display = 'block'; }
+      } catch (error) { console.error("Error loading order list:", error); tableBody.innerHTML = ''; errorElement.textContent = 'Kunde inte ladda orderlistan. Autentisering eller API kan saknas.'; errorElement.style.display = 'block';       
+      }
   }
 
   
