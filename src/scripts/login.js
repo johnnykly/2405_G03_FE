@@ -19,14 +19,24 @@ document.addEventListener("DOMContentLoaded", () => {
     loginSection.classList.remove("hidden");
   });
 
-  // close btn
-  closeLoginBtn?.addEventListener("click", () => {
-    loginSection.classList.add("hidden");
-  });
+  // // close btn
+  // closeLoginBtn?.addEventListener("click", () => {
+  //   loginSection.classList.add("hidden");
+  // });
 
-  closeRegisterBtn?.addEventListener("click", () => {
-    registerSection.classList.add("hidden");
-  });
+  // closeRegisterBtn?.addEventListener("click", () => {
+  //   registerSection.classList.add("hidden");
+  // });
+
+  // 
+closeLoginBtn?.addEventListener("click", () => {
+  window.location.href = "/index.html";
+});
+
+closeRegisterBtn?.addEventListener("click", () => {
+  window.location.href = "/index.html";
+});
+
 
   // log in 
   document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
@@ -107,3 +117,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
