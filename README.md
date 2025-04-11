@@ -24,6 +24,10 @@ Projektet är uppdelat i följande huvudmappar:
     /data
     /images
         /products
+        /hakimlivs-logo-favico.png
+        /hakimlivs-logo-full.png
+        /hakimlivs-logo-half.png
+        /hakimlivs-logo-letter.png
     /scripts
         /admin.js
         /index.js
@@ -33,17 +37,14 @@ Projektet är uppdelat i följande huvudmappar:
         /api.js
 /public
 /css
+    /order.css
+    /admin.css
+    /login.css
 index.html
 admin.html
 login.html
 order.html
-main.css
-order.css
 style.css
-header.css
-footer.css
-global.css
-admin.css
 ```
 ## Setup och installation
 För att köra projektet lokalt:
@@ -85,12 +86,7 @@ Användning och hantering av backend-kod hänvisas till backends readme.md
 |DELETE       |/products/:id       |Radera en produkt       |
 |GET       |/categories       |Hämta alla kategorier       |
 |GET       |/orders       |Hämta alla ordrar       |
-|GET       |/orders/:id       |Hämta en specifik order per ID       |
-|GET       |/orders/user/myorders       |Hämta nuvarande användares ordrar       |
 |POST       |/orders       |Skapa en ny order       |
-|PUT       |/orders/:id/status       |Uppdatera orderstatus       |
-|PUT       |/orders/:id/cancel       |Avbryt order       |
-
 ```
 Ansluten till backend-API via [https://grupp-3.vercel.app/api/]
 ```
