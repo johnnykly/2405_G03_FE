@@ -1,39 +1,51 @@
 *, *::before, *::after {
   box-sizing: border-box;
-}
-
-/* HTML & BODY */
-html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
+:root {
+  --navy: #001e62;
+  --red: #F70035;
+  --blue: #2426CC;
+  --light-gray: #EFEFEF;
+  --mid-gray: #777777;
+  --dark-gray: #2d2d2d;
+  --white: #FFFFFF;
+  --black: #000000;
+  --off-white: #F7F7F7;
+
+  font-size: 14px;
+  font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: var(--off-white);
+  color: var(--black);
+}
+
+/* BODY */
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #f7f7f7;
-  color: #000000;
+  background-color: var(--off-white);
 }
 
 /* HEADER */
 .site-header {
+  flex-shrink: 0;
+  width: 100%;
   background-color: #fff;
-  padding: 1rem;
+  border-bottom: 1px solid #eee;
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 1px solid #eee;
 }
 
 .site-header nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: stretch;
   gap: 1rem;
+  padding: 1rem;
 }
 
 .logo img {
@@ -43,24 +55,25 @@ body {
 
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   list-style: none;
-  padding: 0;
-  margin: 0;
+  margin-bottom: 1rem;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: var(--navy, #001e62);
+  color: var(--navy);
   font-weight: 600;
 }
 
-/* Search input */
+/* SEARCH */
 .search-container {
   position: relative;
-  width: 100%;
-  max-width: 300px;
+  display: flex;
+  align-items: center;
   flex: 1;
+  max-width: 100%;
 }
 
 #site-header-search {
@@ -76,27 +89,28 @@ body {
 .search-icon {
   position: absolute;
   right: 10px;
-  font-size: 1.3rem;
-  pointer-events: none;
   top: 50%;
   transform: translateY(-50%);
+  font-size: 1.3rem;
   color: #888;
+  pointer-events: none;
 }
 
-/* MAIN */
 main {
   flex: 1;
-  padding: 2rem 1rem;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  padding: 2rem 1rem;
+  margin-top: 85px;
+  margin-bottom: 50px;
 }
 
+/* LOGIN / REGISTER SECTION */
 .login-section,
 .register-section {
   width: 100%;
   max-width: 400px;
-  margin-top: 60px;
 }
 
 .modal {
@@ -107,6 +121,7 @@ main {
   width: 100%;
 }
 
+/* INPUTS & BUTTONS */
 input,
 button {
   width: 100%;
@@ -159,12 +174,14 @@ button:hover {
 
 /* FOOTER */
 .site-footer {
-  background-color: #001e62;
+  flex-shrink: 0;
+  background-color: var(--navy);
   color: white;
   padding: 2rem 1rem;
   text-align: center;
   width: 100%;
-  margin-top: auto;
+  /* margin-top: auto; */
+  margin-bottom: 2rem;
 }
 
 .footer-links {
@@ -172,18 +189,20 @@ button:hover {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
+  margin-bottom: 2rem;
 }
 
 .footer-links a {
-  color: white;
   text-decoration: none;
+  color: white;
 }
 
 .footer-links a:hover {
   text-decoration: underline;
 }
 
+/* SCROLLBAR */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -198,48 +217,14 @@ button:hover {
   background-color: #350c82;
 }
 
-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2rem 1rem;
-  margin-top: 60px; 
-}
-
-.site-footer {
-  background-color: #001e62;
-  color: white;
-  padding: 2rem 1rem 3rem 1rem; 
-  text-align: center;
-  width: 100%;
-  margin-top: auto;
-}
-
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem; 
-}
-
-@media (min-width: 768px) {
-  .modal {
-    max-width: 500px;
-    padding: 2.5rem;
-  }
-
-  input, button {
-    font-size: 1.05rem;
-  }
-
-  .close-btn {
-    font-size: 1.6rem;
-  }
-
+/* RESPONSIVE */
+@media (min-width: 600px) {
   .search-container {
     max-width: 400px;
+  }
+
+  #site-header-search {
+    font-size: 1.1rem;
   }
 
   .search-icon {
@@ -253,7 +238,8 @@ main {
     padding: 3rem;
   }
 
-  input, button {
+  input,
+  button {
     font-size: 1.1rem;
     padding: 1rem;
   }
@@ -267,16 +253,16 @@ main {
   }
 
   #site-header-search {
-    font-size: 1.2rem;
     padding: 1rem 3rem 1rem 1rem;
-  }
-
-  .search-icon {
-    font-size: 1.5rem;
   }
 
   .login-section,
   .register-section {
     margin-top: 50px;
+  }
+
+  .site-header nav {
+    flex-direction: row;
+    align-items: center;
   }
 }
