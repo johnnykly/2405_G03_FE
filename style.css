@@ -174,7 +174,7 @@ aside {
       justify-items: center;
       align-items: center;
       max-width: 600px;
-      max-height: 600px;
+      max-height: 500px;
       padding: 1rem;
       margin-left: 4rem;
       margin-right: 4rem;
@@ -202,9 +202,6 @@ aside {
           justify-self: center;
         }
       }
-      
-
-      
     }
   }
 }
