@@ -149,6 +149,7 @@ aside {
   grid-area: main-content;
   align-self: start;
   align-items: center;
+  display: grid;
   justify-content: center;
 }
 
