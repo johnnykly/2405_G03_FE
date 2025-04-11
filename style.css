@@ -91,7 +91,7 @@ aside {
   align-self: start;
   display: none;
   width: 300px;
-  height: 100%;
+  height: 100vh;
   top: 0;
   z-index: 20;
   background-color: #f7f7f7;
@@ -99,6 +99,7 @@ aside {
   color: navy;
   font-size: 1.2rem;
   font-weight: bold;
+  padding-top: 15%;
 
   .sidebar-items {
     display: grid;
@@ -171,11 +172,12 @@ aside {
     .main-product-card-item {
       display: grid;
       justify-items: center;
-      width: 100%;
-      max-width: 800px;
+      align-items: center;
+      max-width: 600px;
+      max-height: 600px;
       padding: 1rem;
-      margin-left: 1rem;
-      margin-right: 1rem;
+      margin-left: 4rem;
+      margin-right: 4rem;
       margin-top: 6rem;
       margin-bottom: 6rem;
       border-radius: 1rem;
@@ -184,36 +186,25 @@ aside {
       color: black;
       background-color: white;
 
-      img {
-        display: grid;
-        justify-self: center;
-        width: 300px;
-        object-fit: cover;
-        border-radius: 4px;
-        margin-bottom: 0.5rem;
+      .product-card-info {
+        display:grid;
+        justify-items: center;
+        img {
+          display: grid;
+          justify-self: center;
+          width:30%;
+          object-fit: cover;
+          border-radius: 4px;
+          margin-bottom: 0.5rem;
+        }
+  
+        h3 {
+          justify-self: center;
+        }
       }
+      
 
-      h3 {
-        justify-self: center;
-      }
-
-      a:link,
-      a:visited {
-        background-color: #001e62;
-        color: white;
-        align-content: center;
-        margin-top: 1rem;
-        padding: 14px 25px;
-        text-decoration: none;
-        display: grid;
-        justify-self: center;
-        border-radius: 1rem;
-      }
-
-      a:hover,
-      a:active {
-        background-color: red;
-      }
+      
     }
   }
 }
