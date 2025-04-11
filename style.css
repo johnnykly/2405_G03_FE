@@ -63,12 +63,6 @@ h1 {
 
 .site-header nav .logo img {
   max-width: 320px;
-  
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 
 .nav-links {
@@ -218,21 +212,30 @@ aside {
     opacity: 0.98;
     z-index: 5;
 
-    .cart-list {
-      max-width: 800px;
-      min-width: 400px;
-      padding: 3rem;
-      border-radius: 1rem;
-      justify-self: center;
-      display: grid;
-      margin-top: 15rem;
-      background-color: #333;
-      z-index: 6;
-      color: black;
-      background-color: white;
+      .cart-list {
+        display:grid;
+        justify-self: center;
+        align-items: center;
+        width: 80vw;
+        max-width: 80%;
+        padding: 3rem;
+        max-height: 60vh;
+        border-radius: 1rem;
+        margin-top: 10rem;
+        z-index: 6;
+        color: black;
+        background-color: white;
+        overflow-y: scroll;
+        div {
+          width: 100vw;
+        }
+      }
 
       h1 {
-        justify-self: center;
+        display: grid;
+        justify-content: left;
+        margin: 0;
+        margin-bottom: 2rem;
       }
 
       a:link,
@@ -255,7 +258,7 @@ aside {
       }
     }
   }
-}
+
 
 /* Mobile menu */
 #mobilemenu {
